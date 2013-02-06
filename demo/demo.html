@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../src/bootstrap-wizard.css" rel="stylesheet" />
+		<link href="chosen/chosen.css" rel="stylesheet" />
+		
+		<style type="text/css">
+	        .wizard-modal p {
+	        	margin: 0 0 10px;
+	        	padding: 0;
+	        }
+	        
+			#wizard-ns-detail-servers, .wizard-additional-servers {
+				font-size:12px;
+				margin-top:10px;
+				margin-left:15px;
+			}
+			#wizard-ns-detail-servers > li, .wizard-additional-servers li {
+				line-height:20px;
+				list-style-type:none;
+			}
+			#wizard-ns-detail-servers > li > img {
+				padding-right:5px;
+			}
+			
+			.wizard-modal .chzn-container .chzn-results {
+				max-height:150px;
+			}
+			.wizard-addl-subsection {
+				margin-bottom:40px;
+			}
+		</style>
+	</head>
+		
+	<body style="padding:30px;">
+	
+		<div style="margin-bottom:20px;">
+			<a href="http://panopta.com" target="_blank">
+				<img style="width:220px;" src="https://my.panopta.com/static/images/Panopta-Logo.png">
+			</a>
+		</div>
+	
+		<a class="btn" href="http://www.panopta.com/?p=3481">Back to docs</a>
+		<button id="open-wizard" class="btn btn-primary">Open wizard</button>
+	
+	
+	
+	
+		<div class="wizard" id="wizard-demo">
+			<h1>Create Server</h1>
+		
+			<div class="wizard-card" data-onValidated="setServerName" data-cardname="name">
+				<h3>Name &amp; FQDN</h3>
+		
+				<div class="wizard-input-section">
+					<p>
+						To begin, please enter the IP of your server or the
+						fully-qualified name.
+					</p>
+		
+					<div class="control-group">
+						<input id="new-server-fqdn" type="text"
+							placeholder="FQDN or IP" data-validate="fqdn_or_ip" />
+					</div>
+				</div>
+		
+				<div class="wizard-input-section">
+					<p>
+						Optionally, give this server a label.  This will appear
+						in the server nagivation.
+					</p>
+		
+					<div class="control-group">
+						<input id ="new-server-name" type="text"
+							placeholder="Server name (optional)" data-validate="" />
+					</div>
+				</div>
+			</div>
+		
+		
+			<div class="wizard-card" data-cardname="group">
+				<h3>Server Group</h3>
+		
+				<div class="wizard-input-section">
+					<p>
+						Where would you like server <strong class="create-server-name"></strong>
+						to go?
+					</p>
+		
+					<img class="wizard-group-list" src="images/groups.png" />
+				</div>
+			</div>
+		
+		
+			<div class="wizard-card" data-cardname="services">
+				<h3>Service Selection</h3>
+		
+				<div class="alert hide">
+					It's recommended that you select at least one
+					service, like ping.
+				</div>
+		
+				<div class="wizard-input-section">
+					<p>
+						Please choose the services you'd like Panopta to
+						monitor.  Any service you select will be given a default
+						check frequency of 1 minute.
+					</p>
+		
+					<select data-placeholder="Service List" style="width:350px;"
+						class="chzn-select create-server-service-list" multiple>
+		
+		                <option value=""></option>
+		                <optgroup label="Basic">
+		                	<option selected value="icmp.ping">Ping</option>
+		                	<option selected value="tcp.ssh">SSH</option>
+		                	<option value="tcp.ftp">FTP</option>
+		                </optgroup>
+		                <optgroup label="Web">
+		                	<option selected value="tcp.http">HTTP</option>
+		                	<option value="tcp.https">HTTP (Secure)</option>
+		                	<option value="tcp.dns">DNS</option>
+		                </optgroup>
+		                <optgroup label="Email">
+		                	<option value="tcp.pop">POP</option>
+		                	<option value="tcp.imap">IMAP</option>
+		                	<option value="tcp.smtp">SMTP</option>
+		                	<option value="tcp.pops">POP (Secure)</option>
+		                	<option value="tcp.imaps">IMAP (Secure)</option>
+		                	<option value="tcp.smtps">SMTP (Secure)</option>
+		                	<option value="tcp.http.exchange">Microsoft Exchange</option>
+		                </optgroup>
+		                <optgroup label="Databases">
+		                	<option value="tcp.mysql">MySQL</option>
+		                	<option value="tcp.postgres">PostgreSQL</option>
+		                	<option value="tcp.mssql">Microsoft SQL Server</option>
+		                </optgroup>
+		            </select>
+				</div>
+			</div>
+		
+		
+			<div class="wizard-card" data-onload="" data-cardname="location">
+				<h3>Monitoring Location</h3>
+		
+				<div class="wizard-input-section">
+					<p>
+						We determined <strong>Chicago</strong> to be
+						the closest location to monitor
+						<strong class="create-server-name"></strong>
+						If you would like to change this, or you think this is
+						incorrect, please select a different
+						monitoring location.
+					</p>
+		
+					<select data-placeholder="Monitor nodes" style="width:350px;" class="chzn-select">
+		                <option value=""></option>
+		                <optgroup label="North America">
+		                	<option>Atlanta</option>
+		                	<option selected>Chicago</option>
+		                	<option>Dallas</option>
+		                	<option>Denver</option>
+		                	<option>Fremont, CA</option>
+		                	<option>Los Angeles</option>
+		                	<option>Miami</option>
+		                	<option>Newark, NJ</option>
+		                	<option>Phoenix</option>
+		                	<option>Seattle</option>
+		                	<option>Washington, DC</option>
+		                </optgroup>
+		
+		                <optgroup label="Europe">
+		                	<option>Amsterdam, NL</option>
+		                	<option>Berlin</option>
+		                	<option>London</option>
+		                	<option>Milan, Italy</option>
+		                	<option>Nurnberg, Germany</option>
+		                	<option>Paris</option>
+		                	<option>Stockholm</option>
+		                	<option>Vienna</option>
+		                </optgroup>
+		
+		                <optgroup label="Asia/Africa">
+		                	<option>Cairo</option>
+		                	<option>Jakarta</option>
+		                	<option>Johannesburg</option>
+		                	<option>Hong Kong</option>
+		                	<option>Singapore</option>
+		                	<option>Sydney</option>
+		                	<option>Tokyo</option>
+		                </optgroup>
+		
+		            </select>
+		
+				</div>
+			</div>
+		
+			<div class="wizard-card">
+				<h3>Notification Schedule</h3>
+		
+				<div class="wizard-input-section">
+					<p>
+						Select the notification schedule to be used for outages.
+					</p>
+		
+					<select class="wizard-ns-select chzn-select" data-placeholder="Notification schedule" style="width:350px;">
+						<option value=""></option>
+						<option>ALIS Production</option>
+						<option>ALIS Development &amp; Staging</option>
+						<option>Panopta Development &amp; Staging</option>
+						<option>Jira</option>
+						<option>QSC Enterprise Production</option>
+						<option>QSC Enterprise Development &amp; Staging</option>
+						<option>Panopta Production</option>
+						<option>Panopta Monitoring Nodes</option>
+						<option>Common</option>
+					</select>
+				</div>
+		
+				<div class="wizard-ns-detail hide">
+					Also using <strong>ALIS Production</strong>:
+		
+					<ul id="wizard-ns-detail-servers">
+						<li><img src="images/folder.png" />Corporate sites</li>
+						<li><img src="images/folder.png" />dt01.sat.medtelligent.com</li>
+						<li><img src="images/server_new.png" />alisonline.com</li>
+						<li><img src="images/server_new.png" />circa-db04.sat.medtelligent.com</li>
+						<li><img src="images/server_new.png" />circa-services01.sat.medtelligent.com</li>
+						<li><img src="images/server_new.png" />circa-web01.sat.medtelligent.com</li>
+						<li><img src="images/server_new.png" />heartbeat.alisonline.com</li>
+						<li><img src="images/server_new.png" />medtelligent.com</li>
+						<li><img src="images/server_new.png" />dt02.fre.medtelligent.com</li>
+						<li><img src="images/server_new.png" />dev03.lin.medtelligent.com</li>
+					</ul>
+		        </div>
+			</div>
+		
+		
+			<div class="wizard-card">
+				<h3>Agent Setup</h3>
+		
+				<div class="wizard-input-section">
+					<p>The <a target="_blank" href="http://www.panopta.com/support/knowledgebase/support-questions/how-do-i-install-the-panopta-monitoring-agent/">Panopta Agent</a> allows
+						you to monitor local resources (disk usage, cpu usage, etc).
+						If you would like to set that up now, please download
+						and follow the <a target="_blank" href="http://www.panopta.com/support/knowledgebase/support-questions/how-do-i-install-the-panopta-monitoring-agent/">install instructions.</a>
+					</p>
+		
+		
+					<div class="btn-group">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							Download
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">.rpm</a></li>
+							<li><a href="#">.deb</a></li>
+							<li><a href="#">.tar.gz</a></li>
+						</ul>
+					</div>
+		
+				</div>
+		
+		
+				<div class="wizard-input-section">
+					<p>You will be given a server key after you install the Agent
+						on <strong class="create-server-name"></strong>.
+						If you know your server key now, please enter it
+						below.</p>
+		
+					<div class="control-group">
+						<input type="text" class="create-server-agent-key"
+							placeholder="Server key (optional)" data-validate="" />
+					</div>
+				</div>
+			</div>
+		
+		
+		
+			<div class="wizard-error">
+				<div class="alert alert-error">
+					<strong>There was a problem</strong> with your submission.
+					Please correct the errors and re-submit.
+				</div>
+			</div>
+		
+			<div class="wizard-failure">
+				<div class="alert alert-error">
+					<strong>There was a problem</strong> submitting the form.
+					Please try again in a minute.
+				</div>
+			</div>
+		
+			<div class="wizard-success">
+				<div class="alert alert-success">
+					<span class="create-server-name"></span>
+					was created <strong>successfully.</strong>
+				</div>
+		
+				<a class="btn create-another-server">Create another server</a>
+				<span style="padding:0 10px">or</span>
+				<a class="btn im-done">Done</a>
+			</div>
+		
+		</div>
+							
+				
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="chosen/chosen.jquery.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="../src/bootstrap-wizard.js"></script>
+		
+		
+<script type="text/javascript">
+
+function setServerName(card) {
+	var host = $("#new-server-fqdn").val();
+	var name = $("#new-server-name").val();
+	var displayName = host;
+
+	if (name) {
+		displayName = name + " ("+host+")";
+	};
+
+	card.wizard.setSubtitle(displayName);
+	card.wizard.el.find(".create-server-name").text(displayName);
+}
+
+function validateIP(ipaddr) {
+    //Remember, this function will validate only Class C IP.
+    //change to other IP Classes as you need
+    ipaddr = ipaddr.replace(/\s/g, "") //remove spaces for checking
+    var re = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/; //regex. check for digits and in
+                                          //all 4 quadrants of the IP
+    if (re.test(ipaddr)) {
+        //split into units with dots "."
+        var parts = ipaddr.split(".");
+        //if the first unit/quadrant of the IP is zero
+        if (parseInt(parseFloat(parts[0])) == 0) {
+            return false;
+        }
+        //if the fourth unit/quadrant of the IP is zero
+        if (parseInt(parseFloat(parts[3])) == 0) {
+            return false;
+        }
+        //if any part is greater than 255
+        for (var i=0; i<parts.length; i++) {
+            if (parseInt(parseFloat(parts[i])) > 255){
+                return false;
+            }
+        }
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function validateFQDN(val) {
+	return /^[a-z0-9-_]+(\.[a-z0-9-_]+)*\.([a-z]{2,4})$/.test(val);
+}
+
+function fqdn_or_ip(el) {
+	var val = el.val();
+	ret = {
+		status: true
+	};
+	if (!validateFQDN(val)) {
+		if (!validateIP(val)) {
+			ret.status = false;
+			ret.msg = "Invalid IP address or FQDN";
+		}
+	}
+	return ret;
+}
+
+
+$(function() {
+	$.fn.wizard.logging = true;
+	
+	var wizard = $("#wizard-demo").wizard();
+
+	$(".chzn-select").chosen();
+
+
+	wizard.el.find(".wizard-ns-select").change(function() {
+		wizard.el.find(".wizard-ns-detail").show();
+	});
+
+	wizard.el.find(".create-server-service-list").change(function() {
+		var noOption = $(this).find("option:selected").length == 0;
+		wizard.getCard(this).toggleAlert(null, noOption);
+	});
+
+	wizard.cards["name"].on("validated", function(card) {
+		var hostname = card.el.find("#new-server-fqdn").val();
+	});
+
+	wizard.on("submit", function(wizard) {
+		var submit = {
+			"hostname": $("#new-server-fqdn").val()
+		};
+
+		setTimeout(function() {
+			wizard.trigger("success");
+			wizard.hideButtons();
+			wizard._submitting = false;
+			wizard.showSubmitCard("success");
+			wizard._updateProgressBar(0);
+		}, 2000);
+	});
+
+	wizard.on("reset", function(wizard) {
+		wizard.setSubtitle("");
+		wizard.el.find("#new-server-fqdn").val("");
+		wizard.el.find("#new-server-name").val("");
+	});
+
+	wizard.el.find(".wizard-success .im-done").click(function() {
+		wizard.reset().close();
+	});
+
+	wizard.el.find(".wizard-success .create-another-server").click(function() {
+		wizard.reset();
+	});
+	
+	$(".wizard-group-list").click(function() {
+		alert("Disabled for demo.");
+	});
+	
+	$("#open-wizard").click(function() {
+		wizard.show();
+	});
+	
+	wizard.show();
+});
+
+</script>
+		
+		
+	
+	</body>
+</html>
