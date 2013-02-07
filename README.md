@@ -1,6 +1,8 @@
 *Application Wizard for Bootstrap* by [Andrew Moffat](https://github.com/amoffat), built @ [Panopta](http://www.panopta.com/)
 
-# Demo & Documentation page currently DDos'd with traffic.  Take a look in /demo/demo.html for now.
+# [Demo](http://amoffat.github.com/bootstrap-application-wizard/)
+
+Docs DDos'd with traffic.  They'll be back up soon.
 
 ![Screenshot](http://i.imgur.com/e9B2Z.png)
 
