@@ -5,13 +5,13 @@
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="../src/bootstrap-wizard.css" rel="stylesheet" />
 		<link href="chosen/chosen.css" rel="stylesheet" />
-		
+
 		<style type="text/css">
 	        .wizard-modal p {
 	        	margin: 0 0 10px;
 	        	padding: 0;
 	        }
-	        
+
 			#wizard-ns-detail-servers, .wizard-additional-servers {
 				font-size:12px;
 				margin-top:10px;
@@ -24,7 +24,7 @@
 			#wizard-ns-detail-servers > li > img {
 				padding-right:5px;
 			}
-			
+
 			.wizard-modal .chzn-container .chzn-results {
 				max-height:150px;
 			}
@@ -33,85 +33,85 @@
 			}
 		</style>
 	</head>
-		
+
 	<body style="padding:30px;">
-	
+
 		<div style="margin-bottom:20px;">
 			<a href="http://panopta.com" target="_blank">
 				<img style="width:220px;" src="https://my.panopta.com/static/images/Panopta-Logo.png">
 			</a>
 		</div>
-	
+
 		<a class="btn" href="http://www.panopta.com/?p=3481">Back to docs</a>
 		<button id="open-wizard" class="btn btn-primary">Open wizard</button>
-	
-	
-	
-	
+
+
+
+
 		<div class="wizard" id="wizard-demo">
 			<h1>Create Server</h1>
-		
+
 			<div class="wizard-card" data-onValidated="setServerName" data-cardname="name">
 				<h3>Name &amp; FQDN</h3>
-		
+
 				<div class="wizard-input-section">
 					<p>
 						To begin, please enter the IP of your server or the
 						fully-qualified name.
 					</p>
-		
+
 					<div class="control-group">
 						<input id="new-server-fqdn" type="text"
 							placeholder="FQDN or IP" data-validate="fqdn_or_ip" />
 					</div>
 				</div>
-		
+
 				<div class="wizard-input-section">
 					<p>
 						Optionally, give this server a label.  This will appear
 						in the server nagivation.
 					</p>
-		
+
 					<div class="control-group">
 						<input id ="new-server-name" type="text"
 							placeholder="Server name (optional)" data-validate="" />
 					</div>
 				</div>
 			</div>
-		
-		
+
+
 			<div class="wizard-card" data-cardname="group">
 				<h3>Server Group</h3>
-		
+
 				<div class="wizard-input-section">
 					<p>
 						Where would you like server <strong class="create-server-name"></strong>
 						to go?
 					</p>
-		
+
 					<img class="wizard-group-list" src="images/groups.png" />
 				</div>
 			</div>
-		
-		
+
+
 			<div class="wizard-card" data-cardname="services">
 				<h3>Service Selection</h3>
-		
+
 				<div class="alert hide">
 					It's recommended that you select at least one
 					service, like ping.
 				</div>
-		
+
 				<div class="wizard-input-section">
 					<p>
 						Please choose the services you'd like Panopta to
 						monitor.  Any service you select will be given a default
 						check frequency of 1 minute.
 					</p>
-		
+
 					<select data-placeholder="Service List" style="width:350px;"
 						class="chzn-select create-server-service-list" multiple>
-		
+
 		                <option value=""></option>
 		                <optgroup label="Basic">
 		                	<option selected value="icmp.ping">Ping</option>
@@ -140,11 +140,11 @@
 		            </select>
 				</div>
 			</div>
-		
-		
+
+
 			<div class="wizard-card" data-onload="" data-cardname="location">
 				<h3>Monitoring Location</h3>
-		
+
 				<div class="wizard-input-section">
 					<p>
 						We determined <strong>Chicago</strong> to be
@@ -154,7 +154,7 @@
 						incorrect, please select a different
 						monitoring location.
 					</p>
-		
+
 					<select data-placeholder="Monitor nodes" style="width:350px;" class="chzn-select">
 		                <option value=""></option>
 		                <optgroup label="North America">
@@ -170,7 +170,7 @@
 		                	<option>Seattle</option>
 		                	<option>Washington, DC</option>
 		                </optgroup>
-		
+
 		                <optgroup label="Europe">
 		                	<option>Amsterdam, NL</option>
 		                	<option>Berlin</option>
@@ -181,7 +181,7 @@
 		                	<option>Stockholm</option>
 		                	<option>Vienna</option>
 		                </optgroup>
-		
+
 		                <optgroup label="Asia/Africa">
 		                	<option>Cairo</option>
 		                	<option>Jakarta</option>
@@ -191,20 +191,20 @@
 		                	<option>Sydney</option>
 		                	<option>Tokyo</option>
 		                </optgroup>
-		
+
 		            </select>
-		
+
 				</div>
 			</div>
-		
+
 			<div class="wizard-card">
 				<h3>Notification Schedule</h3>
-		
+
 				<div class="wizard-input-section">
 					<p>
 						Select the notification schedule to be used for outages.
 					</p>
-		
+
 					<select class="wizard-ns-select chzn-select" data-placeholder="Notification schedule" style="width:350px;">
 						<option value=""></option>
 						<option>ALIS Production</option>
@@ -218,10 +218,10 @@
 						<option>Common</option>
 					</select>
 				</div>
-		
+
 				<div class="wizard-ns-detail hide">
 					Also using <strong>ALIS Production</strong>:
-		
+
 					<ul id="wizard-ns-detail-servers">
 						<li><img src="images/folder.png" />Corporate sites</li>
 						<li><img src="images/folder.png" />dt01.sat.medtelligent.com</li>
@@ -236,19 +236,19 @@
 					</ul>
 		        </div>
 			</div>
-		
-		
+
+
 			<div class="wizard-card">
 				<h3>Agent Setup</h3>
-		
+
 				<div class="wizard-input-section">
 					<p>The <a target="_blank" href="http://www.panopta.com/support/knowledgebase/support-questions/how-do-i-install-the-panopta-monitoring-agent/">Panopta Agent</a> allows
 						you to monitor local resources (disk usage, cpu usage, etc).
 						If you would like to set that up now, please download
 						and follow the <a target="_blank" href="http://www.panopta.com/support/knowledgebase/support-questions/how-do-i-install-the-panopta-monitoring-agent/">install instructions.</a>
 					</p>
-		
-		
+
+
 					<div class="btn-group">
 						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 							Download
@@ -260,59 +260,59 @@
 							<li><a href="#">.tar.gz</a></li>
 						</ul>
 					</div>
-		
+
 				</div>
-		
-		
+
+
 				<div class="wizard-input-section">
 					<p>You will be given a server key after you install the Agent
 						on <strong class="create-server-name"></strong>.
 						If you know your server key now, please enter it
 						below.</p>
-		
+
 					<div class="control-group">
 						<input type="text" class="create-server-agent-key"
 							placeholder="Server key (optional)" data-validate="" />
 					</div>
 				</div>
 			</div>
-		
-		
-		
+
+
+
 			<div class="wizard-error">
 				<div class="alert alert-error">
 					<strong>There was a problem</strong> with your submission.
 					Please correct the errors and re-submit.
 				</div>
 			</div>
-		
+
 			<div class="wizard-failure">
 				<div class="alert alert-error">
 					<strong>There was a problem</strong> submitting the form.
 					Please try again in a minute.
 				</div>
 			</div>
-		
+
 			<div class="wizard-success">
 				<div class="alert alert-success">
 					<span class="create-server-name"></span>
 					was created <strong>successfully.</strong>
 				</div>
-		
+
 				<a class="btn create-another-server">Create another server</a>
 				<span style="padding:0 10px">or</span>
 				<a class="btn im-done">Done</a>
 			</div>
-		
+
 		</div>
-							
-				
+
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script src="chosen/chosen.jquery.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="../src/bootstrap-wizard.js"></script>
-		
-		
+
+
 <script type="text/javascript">
 
 function setServerName(card) {
@@ -379,7 +379,7 @@ function fqdn_or_ip(el) {
 
 $(function() {
 	$.fn.wizard.logging = true;
-	
+
 	var wizard = $("#wizard-demo").wizard();
 
 	$(".chzn-select").chosen();
@@ -425,21 +425,21 @@ $(function() {
 	wizard.el.find(".wizard-success .create-another-server").click(function() {
 		wizard.reset();
 	});
-	
+
 	$(".wizard-group-list").click(function() {
 		alert("Disabled for demo.");
 	});
-	
+
 	$("#open-wizard").click(function() {
 		wizard.show();
 	});
-	
+
 	wizard.show();
 });
 
 </script>
-		
-		
-	
+
+
+
 	</body>
 </html>

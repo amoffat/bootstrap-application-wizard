@@ -36,7 +36,7 @@
 		this.el = card;
 		this.title = card.find("h3").first().text();
 		this.name = card.data("cardname") || this.title;
-		
+
 		this.nav = this._createNavElement(this.title, index);
 
 		this._disabled = false;
@@ -59,15 +59,15 @@
 
 				this.trigger("selected");
 			}
-			
-			
+
+
 			/*
 			 * this is ugly, but we're handling the changing of the wizard's
 			 * buttons here, in the WizardCard select.  so when a card is
 			 * selected, we're figuring out if we're the first card or the
 			 * last card and changing the wizard's buttons via the guts of
 			 * the wizard
-			 * 
+			 *
 			 * ideally this logic should be encapsulated by some wizard methods
 			 * that we can call from here, instead of messing with the guts
 			 */
@@ -89,10 +89,10 @@
 				}
 				w.changeNextButton(w.args.buttons.nextText, "btn-primary");
 			}
-			
+
 			return this;
 		},
-		
+
 		// <li><a href="#" data-navindex="0">
 		//     <i class="icon-chevron-right"></i>
 		//     Name &amp; FQDN
@@ -384,6 +384,7 @@
 		this.args = {
 			submitUrl: "",
 			width: 750,
+			progressBarCurrent: false, // Default: false - If set to true, the progress bar stays with the current step and not furthest completed step
 			increaseHeight: 0,
 			buttons: {
 				nextText: "Next",
@@ -487,7 +488,7 @@
 
 		var title = this.markup.children("h1").first();
 		if (title.length) {this.setTitle(title.text());}
-		
+
 		this.on("submit", this._defaultSubmit);
 	}
 
@@ -698,7 +699,7 @@
 				}
 
 				if (currentCard) {
-					
+
 					/*
 					 * here, we're only validating if we're going forward,
 					 * not if we're going backwards in a step
@@ -706,7 +707,7 @@
 					if (i > currentCard.index) {
 						var cardToValidate = currentCard;
 						var ok = false;
-						
+
 						/*
 						 * we need to loop over every card between our current
 						 * card and the card that we clicked, and re-validate
@@ -731,7 +732,7 @@
 							}
 							cardToValidate = cardToValidate.next;
 						}
-						
+
 						cardToValidate.prev.deselect();
 						cardToValidate.prev.markVisited();
 					}
@@ -742,11 +743,16 @@
 
 				newCard.select();
 
-
+				if(this.args.progressBarCurrent == false) {
+					var last_percent = this.percentComplete;
+					this.percentComplete = i * 100.0 / this._cards.length;
+					this.percentComplete = Math.max(last_percent, this.percentComplete);
+					this.updateProgressBar(this.percentComplete);
+				} else {
 				var last_percent = this.percentComplete;
-				this.percentComplete = i * 100.0 / this._cards.length;
-				this.percentComplete = Math.max(last_percent, this.percentComplete);
-				this.updateProgressBar(this.percentComplete);
+					this.percentComplete = i * 100.0 / this._cards.length;
+					this.updateProgressBar(this.percentComplete);
+				}
 
 				return newCard;
 			}
@@ -853,7 +859,7 @@
 					self.cards[currentCard.name] = currentCard;
 				}
 				if (prev) {prev.next = currentCard;}
-				
+
 				self.el.find(".wizard-steps .nav-list").append(currentCard.nav);
 			});
 		},
@@ -894,18 +900,18 @@
 			this.nextButton.attr("disabled", "disabled");
 			return this;
 		},
-		
+
 		serializeArray: function() {
 			var form = this.el.children("form").first();
 			return form.serializeArray();
 		},
-		
+
 		serialize: function() {
 			var form = this.el.children("form").first();
 			return form.serialize();
 		},
 
-		
+
 		/*
 		 * the next 3 functions are to be called by the custom submit event
 		 * handler.  the idea is that after you make an ajax call to submit
@@ -919,22 +925,22 @@
     		this.showSubmitCard("success");
     		this.trigger("submitSuccess");
 		},
-		
+
 		submitFailure: function() {
 			this.log("submit failure");
 			this._submitting = false;
     		this.showSubmitCard("failure");
     		this.trigger("submitFailure");
 		},
-		
+
 		submitError: function() {
 			this.log("submit error");
 			this._submitting = false;
     		this.showSubmitCard("error");
     		this.trigger("submitError");
 		},
-		
-		
+
+
 		_submit: function() {
 			this.log("submitting wizard");
 			this._submitting = true;
@@ -978,8 +984,8 @@
 			var wizard = event.data;
 			wizard._onBackClick.call(wizard);
 		},
-		
-		
+
+
 		/*
 		 * this function is attached by default to the wizard's "submit" event.
 		 * if you choose to implement your own custom submit logic, you should
