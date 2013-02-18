@@ -961,12 +961,12 @@
 
 		_onNextClick: function() {
 			this.log("handling 'next' button click");
-
-			if (this._readyToSubmit) {
+			var currentCard = this.getActiveCard();
+			if (this._readyToSubmit && currentCard.validate()) {
 				this._submit();
 			}
 			else {
-				var currentCard = this.incrementCard();
+				currentCard = this.incrementCard();
 			}
 		},
 
