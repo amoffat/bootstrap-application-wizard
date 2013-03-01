@@ -607,6 +607,7 @@
 
 		reset: function() {
 			this.log("resetting");
+			$('.error-popover').remove();
 			this.updateProgressBar(0);
 			this.hideSubmitCards();
 
