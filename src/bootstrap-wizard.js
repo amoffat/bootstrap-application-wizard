@@ -504,6 +504,35 @@
 			popover.addClass("error-popover");
 			return popover;
 		},
+		
+		destroyPopover: function(pop) {
+			pop = $(pop);
+			pop.parent(".control-group").toggleClass("error", false);
+			
+			/*
+			 * this is the element that the popover was created for
+			 */
+			var el = pop.prev();
+			
+			try {
+				el.popover("destroy");
+			}
+			/*
+			 * older versions of bootstrap don't have a destroy call
+			 * for popovers
+			 */
+			catch (e) {
+				el.popover("hide");
+			}
+		},
+		
+		hidePopovers: function(el, msg) {
+			this.log("hiding all popovers");
+			var self = this;
+			this.el.find(".error-popover").each(function (i, popover) {
+				self.destroyPopover(popover);
+			});
+		},
 
 		eachCard: function(fn) {
 			$.each(this._cards, fn);
@@ -607,6 +636,7 @@
 
 		reset: function() {
 			this.log("resetting");
+			
 			this.updateProgressBar(0);
 			this.hideSubmitCards();
 
@@ -615,6 +645,8 @@
 
 			this.enableNextButton();
 			this.showButtons();
+			
+			this.hidePopovers();
 
 			this.trigger("reset");
 			return this;
