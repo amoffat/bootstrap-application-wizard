@@ -592,13 +592,13 @@
 		},
 
 
-		show: function() {
+		show: function(modal_options) {
 			this.log("showing");
 			if (this._firstShow) {
 				this.setCard(0);
 				this._firstShow = false;
 			}
-			this.el.modal();
+			this.el.modal(modal_options);
 			return this;
 		},
 
