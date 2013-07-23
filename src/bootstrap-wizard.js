@@ -513,9 +513,9 @@
     errorPopover : function (el, msg) {
       this.log("launching popover on", el);
       var popover = el.popover({
-                                 content : msg,
-                                 trigger : "manual"
-                               }).popover("show").next(".popover");
+        content : msg,
+        trigger : "manual"
+      }).popover("show").next(".popover");
 
       popover.addClass("error-popover");
 
