@@ -12,7 +12,6 @@
 }
 .wizard-modal-footer {
     padding:0;
-    text-align:right;
 }
 .wizard-modal-header.modal-header h3 {
     line-height:35px;
@@ -124,6 +123,11 @@ li.wizard-nav-item {
 
 .wizard-buttons-container {
     padding:20px;
+}
+
+.wizard-cancel {
+    display:none;
+    margin-left:20px;
 }
 
 .wizard-modal .popover.error-popover {
