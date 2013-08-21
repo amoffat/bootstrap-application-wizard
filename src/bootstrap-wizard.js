@@ -385,6 +385,7 @@
         this.args = {
             submitUrl: "",
             width: 750,
+            showCancel: false,
             progressBarCurrent: false,
             increaseHeight: 0,
             buttons: {
@@ -855,7 +856,7 @@
 
         showButtons: function() {
             this.log("showing buttons");
-            if (this.args['showCancel']) this.cancelButton.show();
+            if (this.args.showCancel) { this.cancelButton.show(); }
             this.nextButton.show();
             this.backButton.show();
             return this;
