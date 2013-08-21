@@ -21,12 +21,12 @@
  */
 
 (function ($) {
+
     $.fn.wizard = function(args) {
         return new Wizard(this, args);
     };
 
     $.fn.wizard.logging = false;
-
 
     WizardCard = function(wizard, card, index, prev, next) {
         this.wizard = wizard;
@@ -42,7 +42,7 @@
         this._disabled = false;
         this._loaded = false;
         this._events = {};
-    }
+    };
 
     WizardCard.prototype = {
 
@@ -91,16 +91,12 @@
             return this;
         },
 
-        // <li><a href="#" data-navindex="0">
-        //     <i class="icon-chevron-right"></i>
-        //     Name &amp; FQDN
-        // </a></li>
         _createNavElement: function(name, i) {
             var li = $('<li class="wizard-nav-item"></li>');
             var a = $('<a class="wizard-nav-link"></a>');
             a.data("navindex", i);
             li.append(a);
-            a.append('<i class="icon-chevron-right"></i>')
+            a.append('<i class="icon-chevron-right"></i>');
             a.append(name);
             return li;
         },
@@ -345,23 +341,23 @@
     Wizard = function(markup, args) {
         var wizard_template = [
             '<div class="modal hide wizard-modal" role="dialog">',
+
                 '<div class="wizard-modal-header modal-header">',
                     '<button class="wizard-close close" type="button">x</button>',
                     '<h3 class="wizard-title"></h3>',
                     '<span class="wizard-subtitle"></span>',
                 '</div>',
+
                 '<div class="pull-left wizard-steps">',
                     '<div class="wizard-nav-container">',
                         '<ul class="nav nav-list" style="padding-bottom:30px;">',
                         '</ul>',
                     '</div>',
-
                     '<div class="wizard-progress-container">',,
                         '<div class="progress progress-striped">',
                             '<div class="bar"></div>',
                         '</div>',
                     '</div>',
-
                 '</div>',
 
                 '<form>',
@@ -379,6 +375,7 @@
                         '</div>',
                     '</div>',
                 '</form>',
+
             '</div>'
         ];
 
@@ -386,6 +383,7 @@
             submitUrl: "",
             width: 750,
             showCancel: false,
+            forceNavSequence: true,
             progressBarCurrent: false,
             increaseHeight: 0,
             buttons: {
@@ -399,8 +397,7 @@
         $.extend(this.args, args || {});
 
         this.markup = $(markup);
-        this.submitCards = this.markup.find(".wizard-error,.wizard-failure,\
-.wizard-success,.wizard-loading");
+        this.submitCards = this.markup.find(".wizard-error,.wizard-failure,.wizard-success,.wizard-loading");
         this.el = $(wizard_template.join("\n"));
         this.el.find(".wizard-card-container")
             .append(this.markup.find(".wizard-card"))
@@ -482,7 +479,7 @@
         this.closeButton.click(function() {
             self.reset();
             self.close();
-        })
+        });
 
         this.el.find(".wizard-steps").on(
             "click", "li.already-visited a.wizard-nav-link", this,
@@ -495,7 +492,7 @@
         if (title.length) {this.setTitle(title.text());}
 
         this.on("submit", this._defaultSubmit);
-    }
+    };
 
     Wizard.prototype = {
 
@@ -653,6 +650,12 @@
 
             this.hidePopovers();
 
+            if (!this.args.forceNavSequence) {
+                $.each(this.cards, function (index, card) {
+                    card.markVisited();
+                });
+            }
+
             this.trigger("reset");
             return this;
         },
@@ -781,7 +784,6 @@
                 newCard.select();
 
                 if (this.args.progressBarCurrent) {
-                    var last_percent = this.percentComplete;
                     this.percentComplete = i * 100.0 / this._cards.length;
                     this.updateProgressBar(this.percentComplete);
                 }
@@ -883,7 +885,6 @@
         _createCards: function() {
             var prev = null;
             var next = null;
-            var current_i = 0;
             var currentCard = null;
             var wizard = this;
             var self = this;
