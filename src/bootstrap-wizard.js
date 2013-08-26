@@ -479,6 +479,7 @@
         this.closeButton.click(function() {
             self.reset();
             self.close();
+            self.trigger("closed");
         });
 
         this.el.find(".wizard-steps").on(
