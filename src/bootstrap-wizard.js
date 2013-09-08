@@ -21,12 +21,12 @@
  */
 
 (function ($) {
+
 	$.fn.wizard = function(args) {
 		return new Wizard(this, args);
 	};
 
 	$.fn.wizard.logging = false;
-
 
 	WizardCard = function(wizard, card, index, prev, next) {
 		this.wizard = wizard;
@@ -42,7 +42,7 @@
 		this._disabled = false;
 		this._loaded = false;
 		this._events = {};
-	}
+	};
 
 	WizardCard.prototype = {
 
@@ -91,10 +91,6 @@
 			return this;
 		},
 
-		// <li><a href="#" data-navindex="0">
-		//     <i class="icon-chevron-right"></i>
-		//     Name &amp; FQDN
-		// </a></li>
 		_createNavElement: function(name, i) {
 			var li = $('<li class="wizard-nav-item"></li>');
 			var a = $('<a class="wizard-nav-link"></a>');
@@ -370,8 +366,11 @@
 						'</div>',
 						'<div class="wizard-modal-footer">',
 							'<div class="wizard-buttons-container">',
-								'<button class="btn wizard-back" type="button">Back</button>',
-								'<button class="btn btn-primary wizard-next" type="button">Next</button>',
+								'<button class="btn wizard-cancel wizard-close" type="button">Cancel</button>',
+								'<div class="btn-group-single pull-right">',
+									'<button class="btn wizard-back" type="button">Back</button>',
+									'<button class="btn btn-primary wizard-next" type="button">Next</button>',
+								'</div>',
 							'</div>',
 						'</div>',
 					'</div>',
@@ -383,9 +382,11 @@
 		this.args = {
 			submitUrl: "",
 			width: 750,
+			showCancel: false,
 			progressBarCurrent: false,
 			increaseHeight: 0,
 			buttons: {
+				cancelText: "Cancel",
 				nextText: "Next",
 				backText: "Back",
 				submitText: "Submit",
@@ -395,8 +396,7 @@
 		$.extend(this.args, args || {});
 
 		this.markup = $(markup);
-		this.submitCards = this.markup.find(".wizard-error,.wizard-failure,\
-.wizard-success,.wizard-loading");
+		this.submitCards = this.markup.find(".wizard-error,.wizard-failure,.wizard-success,.wizard-loading");
 		this.el = $(wizard_template.join("\n"));
 		this.el.find(".wizard-card-container")
 			.append(this.markup.find(".wizard-card"))
@@ -405,6 +405,7 @@
 
 		this.closeButton = this.el.find("button.wizard-close");
 		this.footer = this.el.find(".wizard-modal-footer");
+		this.cancelButton = this.footer.find(".wizard-cancel");
 		this.backButton = this.footer.find(".wizard-back");
 		this.nextButton = this.footer.find(".wizard-next");
 		this.progress = this.el.find(".progress");
@@ -425,6 +426,7 @@
 		this.nextButton.click(this, this._handleNextClick);
 		this.backButton.click(this, this._handleBackClick);
 
+		this.cancelButton.text(this.args.buttons.cancelText);
 		this.backButton.text(this.args.buttons.backText);
 		this.nextButton.text(this.args.buttons.nextText);
 
@@ -476,7 +478,8 @@
 		this.closeButton.click(function() {
 			self.reset();
 			self.close();
-		})
+			self.trigger("closed");
+		});
 
 		this.el.find(".wizard-steps").on(
 			"click", "li.already-visited a.wizard-nav-link", this,
@@ -489,7 +492,7 @@
 		if (title.length) {this.setTitle(title.text());}
 
 		this.on("submit", this._defaultSubmit);
-	}
+	};
 
 	Wizard.prototype = {
 
@@ -597,6 +600,7 @@
 				this.setCard(0);
 				this._firstShow = false;
 			}
+			if (this.args.showCancel) { this.cancelButton.show(); }
 			this.el.modal();
 			return this;
 		},
@@ -841,6 +845,7 @@
 
 		hideButtons: function() {
 			this.log("hiding buttons");
+			this.cancelButton.hide();
 			this.nextButton.hide();
 			this.backButton.hide();
 			return this;
@@ -848,6 +853,7 @@
 
 		showButtons: function() {
 			this.log("showing buttons");
+			if (this.args.showCancel) { this.cancelButton.show(); }
 			this.nextButton.show();
 			this.backButton.show();
 			return this;
@@ -976,6 +982,7 @@
 			this._submitting = true;
 
 			this.lockCards();
+			this.cancelButton.hide();
 			this.backButton.hide();
 
 			this.showSubmitCard("loading");

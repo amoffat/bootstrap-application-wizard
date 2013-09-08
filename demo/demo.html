@@ -7,10 +7,10 @@
 		<link href="chosen/chosen.css" rel="stylesheet" />
 
 		<style type="text/css">
-	        .wizard-modal p {
-	        	margin: 0 0 10px;
-	        	padding: 0;
-	        }
+			.wizard-modal p {
+				margin: 0 0 10px;
+				padding: 0;
+			}
 
 			#wizard-ns-detail-servers, .wizard-additional-servers {
 				font-size:12px;
@@ -155,7 +155,7 @@
 						monitoring location.
 					</p>
 
-					<select data-placeholder="Monitor nodes" style="width:350px;" class="chzn-select">
+				<select data-placeholder="Monitor nodes" style="width:350px;" class="chzn-select">
 		                <option value=""></option>
 		                <optgroup label="North America">
 		                	<option>Atlanta</option>
@@ -378,12 +378,14 @@ function fqdn_or_ip(el) {
 
 
 $(function() {
+
 	$.fn.wizard.logging = true;
 
-	var wizard = $("#wizard-demo").wizard();
+	var wizard = $("#wizard-demo").wizard({
+		showCancel: true
+	});
 
 	$(".chzn-select").chosen();
-
 
 	wizard.el.find(".wizard-ns-select").change(function() {
 		wizard.el.find(".wizard-ns-detail").show();
@@ -408,7 +410,7 @@ $(function() {
 			wizard.hideButtons();
 			wizard._submitting = false;
 			wizard.showSubmitCard("success");
-			wizard._updateProgressBar(0);
+			wizard.updateProgressBar(0);
 		}, 2000);
 	});
 
