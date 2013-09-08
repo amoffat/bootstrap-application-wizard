@@ -72,6 +72,10 @@
 			 * that we can call from here, instead of messing with the guts
 			 */
 			var w = this.wizard;
+
+			// The back button is only disabled on this first card...
+			w.backButton.toggleClass("disabled", this.index == 0);
+
 			if (this.index >= w._cards.length-1) {
 				this.log("on last card, changing next button to submit");
 
@@ -81,12 +85,6 @@
 			}
 			else {
 				w._readyToSubmit = false;
-				if (this.index == 0) {
-					w.backButton.toggleClass("disabled", true);
-				}
-				else {
-					w.backButton.toggleClass("disabled", false);
-				}
 				w.changeNextButton(w.args.buttons.nextText, "btn-primary");
 			}
 
@@ -347,23 +345,23 @@
 	Wizard = function(markup, args) {
 		var wizard_template = [
 			'<div class="modal hide wizard-modal" role="dialog">',
+
 				'<div class="wizard-modal-header modal-header">',
 					'<button class="wizard-close close" type="button">x</button>',
 					'<h3 class="wizard-title"></h3>',
 					'<span class="wizard-subtitle"></span>',
 				'</div>',
+
 				'<div class="pull-left wizard-steps">',
 					'<div class="wizard-nav-container">',
 						'<ul class="nav nav-list" style="padding-bottom:30px;">',
 						'</ul>',
 					'</div>',
-
 					'<div class="wizard-progress-container">',,
 						'<div class="progress progress-striped">',
 							'<div class="bar"></div>',
 						'</div>',
 					'</div>',
-
 				'</div>',
 
 				'<form>',
@@ -378,6 +376,7 @@
 						'</div>',
 					'</div>',
 				'</form>',
+
 			'</div>'
 		];
 
@@ -776,7 +775,6 @@
 				newCard.select();
 
 				if (this.args.progressBarCurrent) {
-					var last_percent = this.percentComplete;
 					this.percentComplete = i * 100.0 / this._cards.length;
 					this.updateProgressBar(this.percentComplete);					
 				}
@@ -876,7 +874,6 @@
 		_createCards: function() {
 			var prev = null;
 			var next = null;
-			var current_i = 0;
 			var currentCard = null;
 			var wizard = this;
 			var self = this;
