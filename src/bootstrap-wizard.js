@@ -334,7 +334,7 @@
 
 		isActive: function() {
 			return this.nav.hasClass("active");
-		},
+		}
 	};
 
 
@@ -528,7 +528,7 @@
 			}
 		},
 		
-		hidePopovers: function(el, msg) {
+		hidePopovers: function(el) {
 			this.log("hiding all popovers");
 			var self = this;
 			this.el.find(".error-popover").each(function (i, popover) {
