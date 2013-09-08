@@ -28,7 +28,7 @@
 
 	$.fn.wizard.logging = false;
 
-	WizardCard = function(wizard, card, index, prev, next) {
+	var WizardCard = function(wizard, card, index, prev, next) {
 		this.wizard = wizard;
 		this.index = index;
 		this.prev = prev;
@@ -594,14 +594,14 @@
 		},
 
 
-		show: function() {
+		show: function(modalOptions) {
 			this.log("showing");
 			if (this._firstShow) {
 				this.setCard(0);
 				this._firstShow = false;
 			}
 			if (this.args.showCancel) { this.cancelButton.show(); }
-			this.el.modal();
+			this.el.modal(modalOptions);
 			return this;
 		},
 
@@ -783,9 +783,9 @@
 					this.updateProgressBar(this.percentComplete);					
 				}
 				else {
-					var last_percent = this.percentComplete;
+					var lastPercent = this.percentComplete;
 					this.percentComplete = i * 100.0 / this._cards.length;
-					this.percentComplete = Math.max(last_percent, this.percentComplete);
+					this.percentComplete = Math.max(lastPercent, this.percentComplete);
 					this.updateProgressBar(this.percentComplete);
 				}
 
@@ -958,22 +958,22 @@
 		submitSuccess: function() {
 			this.log("submit success");
 			this._submitting = false;
-    		this.showSubmitCard("success");
-    		this.trigger("submitSuccess");
+			this.showSubmitCard("success");
+			this.trigger("submitSuccess");
 		},
 
 		submitFailure: function() {
 			this.log("submit failure");
 			this._submitting = false;
-    		this.showSubmitCard("failure");
-    		this.trigger("submitFailure");
+			this.showSubmitCard("failure");
+			this.trigger("submitFailure");
 		},
 
 		submitError: function() {
 			this.log("submit error");
 			this._submitting = false;
-    		this.showSubmitCard("error");
-    		this.trigger("submitError");
+			this.showSubmitCard("error");
+			this.trigger("submitError");
 		},
 
 
