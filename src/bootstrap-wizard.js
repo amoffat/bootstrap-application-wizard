@@ -339,8 +339,48 @@
 
 
 	Wizard = function(markup, args) {
-		var wizard_template = [
+		var wizard_template_modal = [
 			'<div class="modal hide wizard-modal" role="dialog">',
+
+				'<div class="wizard-modal-header modal-header">',
+					'<button class="wizard-close close" type="button">x</button>',
+					'<h3 class="wizard-title"></h3>',
+					'<span class="wizard-subtitle"></span>',
+				'</div>',
+
+				'<div class="pull-left wizard-steps">',
+					'<div class="wizard-nav-container">',
+						'<ul class="nav nav-list" style="padding-bottom:30px;">',
+						'</ul>',
+					'</div>',
+					'<div class="wizard-progress-container">',,
+						'<div class="progress progress-striped">',
+							'<div class="bar"></div>',
+						'</div>',
+					'</div>',
+				'</div>',
+
+				'<form>',
+					'<div class="wizard-cards">',
+						'<div class="wizard-card-container">',
+						'</div>',
+						'<div class="wizard-modal-footer">',
+							'<div class="wizard-buttons-container">',
+								'<button class="btn wizard-cancel wizard-close" type="button">Cancel</button>',
+								'<div class="btn-group-single pull-right">',
+									'<button class="btn wizard-back" type="button">Back</button>',
+									'<button class="btn btn-primary wizard-next" type="button">Next</button>',
+								'</div>',
+							'</div>',
+						'</div>',
+					'</div>',
+				'</form>',
+
+			'</div>'
+		];
+
+		var wizard_template_no_modal = [
+			'<div class="wizard-no-modal" role="dialog">',
 
 				'<div class="wizard-modal-header modal-header">',
 					'<button class="wizard-close close" type="button">x</button>',
@@ -383,6 +423,7 @@
 			submitUrl: "",
 			width: 750,
 			showCancel: false,
+			showClose: true,
 			progressBarCurrent: false,
 			increaseHeight: 0,
 			buttons: {
@@ -391,9 +432,18 @@
 				backText: "Back",
 				submitText: "Submit",
 				submittingText: "Submitting...",
-			}
+			},
+			isModal: true
 		};
 		$.extend(this.args, args || {});
+
+		var wizard_template = this.args.isModal ? wizard_template_modal : wizard_template_no_modal;
+
+		// When not in modal buttons "Cancel" or "Closed" don't make much sense
+		if (!this.args.isModal) {
+			this.args.showCancel = false;
+			this.args.showClose = false;
+		}
 
 		this.markup = $(markup);
 		this.submitCards = this.markup.find(".wizard-error,.wizard-failure,.wizard-success,.wizard-loading");
@@ -444,14 +494,20 @@
 		this.el.find(".wizard-card").css("height", (navHeight-60)+"px");
 		this.submitCards.css("height", (navHeight-60)+"px");
 
-		this.el.css("margin-top", -(this.el.height() / 2));
+		if (this.args.isModal) {
+			this.el.css("margin-top", -(this.el.height() / 2));	
+		}
+		
 
 
 		/*
 		 * adjust the width of the modal
 		 */
 		this.el.css("width", this.args.width);
-		this.el.css("margin-left", -(this.args.width / 2));
+		if (this.args.isModal) {
+			this.el.css("margin-left", -(this.args.width / 2));
+		}
+		
 
 
 
@@ -583,13 +639,13 @@
 
 		hide: function() {
 			this.log("hiding");
-			this.el.modal("hide");
+			this.args.isModal ? this.el.modal("hide") : this.el.css("display", "none");
 			return this;
 		},
 
 		close: function() {
 			this.log("closing");
-			this.el.modal("hide");
+			this.args.isModal ? this.el.modal("hide") : this.el.css("display", "none");
 			return this;
 		},
 
@@ -601,7 +657,13 @@
 				this._firstShow = false;
 			}
 			if (this.args.showCancel) { this.cancelButton.show(); }
-			this.el.modal(modalOptions);
+			if (this.args.showClose) { this.closeButton.show(); }
+			if (this.args.isModal) {
+				this.el.modal(modalOptions);
+			} else {
+				this.el.css("display", "block");
+			}
+			
 			return this;
 		},
 
@@ -846,6 +908,7 @@
 		hideButtons: function() {
 			this.log("hiding buttons");
 			this.cancelButton.hide();
+			this.closeButton.hide();
 			this.nextButton.hide();
 			this.backButton.hide();
 			return this;
@@ -854,6 +917,7 @@
 		showButtons: function() {
 			this.log("showing buttons");
 			if (this.args.showCancel) { this.cancelButton.show(); }
+			if (this.args.showClose) {this.closeButton.show()};
 			this.nextButton.show();
 			this.backButton.show();
 			return this;
@@ -983,6 +1047,7 @@
 
 			this.lockCards();
 			this.cancelButton.hide();
+			this.closeButton.hide();
 			this.backButton.hide();
 
 			this.showSubmitCard("loading");
