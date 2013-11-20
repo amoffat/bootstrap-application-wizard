@@ -552,11 +552,13 @@
 
 	Wizard.prototype = {
 
-		errorPopover: function(el, msg) {
+		errorPopover: function(el, msg, allowHtml) {
 			this.log("launching popover on", el);
+			allowHtml = typeof allowHtml !== "undefined" ? allowHtml : false;
 			var popover = el.popover({
 				content: msg,
-				trigger: "manual"
+				trigger: "manual",
+				html: allowHtml
 			}).popover("show").next(".popover");
 
 			popover.addClass("error-popover");
