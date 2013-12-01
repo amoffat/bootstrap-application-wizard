@@ -19,33 +19,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 (function ($) {
-
 	$.fn.wizard = function(args) {
 		return new Wizard(this, args);
 	};
 
 	$.fn.wizard.logging = false;
-
+	
 	var WizardCard = function(wizard, card, index, prev, next) {
-		this.wizard = wizard;
-		this.index = index;
-		this.prev = prev;
-		this.next = next;
-		this.el = card;
-		this.title = card.find("h3").first().text();
-		this.name = card.data("cardname") || this.title;
+		this.wizard 	= wizard;
+		this.index 		= index;
+		this.prev 		= prev;
+		this.next 		= next;
+		this.el 		= card;
+		this.title 		= card.find("h3").first().text();
+		this.name 		= card.data("cardname") || this.title;
 
-		this.nav = this._createNavElement(this.title, index);
+		this.nav 		= this._createNavElement(this.title, index);
 
-		this._disabled = false;
-		this._loaded = false;
-		this._events = {};
+		this._disabled 	= false;
+		this._loaded 	= false;
+		this._events =	 {};
 	};
-
+	
 	WizardCard.prototype = {
-
 		select: function() {
 			this.log("selecting");
 			if (!this.isSelected()) {
@@ -96,7 +93,7 @@
 			var a = $('<a class="wizard-nav-link"></a>');
 			a.data("navindex", i);
 			li.append(a);
-			a.append('<i class="icon-chevron-right"></i>')
+			a.append('<span class="glyphicon glyphicon-chevron-right"></span> ');
 			a.append(name);
 			return li;
 		},
@@ -296,8 +293,7 @@
 					cardValidated = true;
 				}
 				if (!cardValidated) failures = true;
-				this.log("after running html-embedded card validator, failures\
- is", failures);
+				this.log("after running html-embedded card validator, failures is", failures);
 			}
 
 			/*
@@ -322,7 +318,7 @@
 			}
 			return validated;
 		},
-
+		
 		log: function() {
 			if (!window.console || !$.fn.wizard.logging) {return;}
 			var prepend = "card '"+this.name+"': ";
@@ -336,222 +332,233 @@
 			return this.nav.hasClass("active");
 		}
 	};
-
-
+	
 	Wizard = function(markup, args) {
-		var wizard_template_modal = [
-			'<div class="modal hide wizard-modal" role="dialog">',
-
-				'<div class="wizard-modal-header modal-header">',
-					'<button class="wizard-close close" type="button">x</button>',
-					'<h3 class="wizard-title"></h3>',
-					'<span class="wizard-subtitle"></span>',
-				'</div>',
-
-				'<div class="pull-left wizard-steps">',
-					'<div class="wizard-nav-container">',
-						'<ul class="nav nav-list" style="padding-bottom:30px;">',
-						'</ul>',
-					'</div>',
-					'<div class="wizard-progress-container">',,
-						'<div class="progress progress-striped">',
-							'<div class="bar"></div>',
+		
+		/*
+		 * TO BE REMOVED TEMP
+		 * 
+		 * 
+    	'<li class="wizard-nav-item"><a class="wizard-nav-link" href="#"><span class="glyphicon glyphicon-chevron-right"></span> Label</a></li>',
+    	'<li class="wizard-nav-item"><a class="wizard-nav-link" href="#"><span class="glyphicon glyphicon-chevron-right"></span> Address</a></li>',
+    	'<li class="wizard-nav-item"><a class="wizard-nav-link" href="#"><span class="glyphicon glyphicon-chevron-right"></span> Contacts</a></li>',
+    	'<li class="wizard-nav-item"><a class="wizard-nav-link" href="#"><span class="glyphicon glyphicon-chevron-right"></span> Comments</a></li>',
+		 */
+		
+		/* TEMPLATE */
+		this.wizard_template = [
+            '<div  class="modal fade wizard">',
+            	'<div class="modal-dialog wizard-dialog">',
+            		'<div class="modal-content wizard-content">',
+            			'<div class="modal-header wizard-header">',
+            				'<button type="button" class="close wizard-close" aria-hidden="true">&times;</button>',
+        					'<h3 class="modal-title wizard-title"></h3>',
 						'</div>',
-					'</div>',
-				'</div>',
-
-				'<form>',
-					'<div class="wizard-cards">',
-						'<div class="wizard-card-container">',
-						'</div>',
-						'<div class="wizard-modal-footer">',
-							'<div class="wizard-buttons-container">',
-								'<button class="btn wizard-cancel wizard-close" type="button">Cancel</button>',
-								'<div class="btn-group-single pull-right">',
-									'<button class="btn wizard-back" type="button">Back</button>',
-									'<button class="btn btn-primary wizard-next" type="button">Next</button>',
+						'<div class="modal-body wizard-body">',
+							'<div class="pull-left wizard-steps">',
+								'<div class="wizard-nav-container">',
+									'<ul class="nav wizard-nav-list">',
+						        	'</ul>',
+					        	'</div>',
+					        	'<div class="wizard-progress-container">',
+									'<div class="progress progress-striped">',
+										'<div class="progress-bar" style="width: 0%;"></div>',
+									'</div>',
 								'</div>',
 							'</div>',
-						'</div>',
-					'</div>',
-				'</form>',
-
-			'</div>'
-		];
-
-		var wizard_template_no_modal = [
-			'<div class="wizard-no-modal" role="dialog">',
-
-				'<div class="wizard-modal-header modal-header">',
-					'<button class="wizard-close close" type="button">x</button>',
-					'<h3 class="wizard-title"></h3>',
-					'<span class="wizard-subtitle"></span>',
-				'</div>',
-
-				'<div class="pull-left wizard-steps">',
-					'<div class="wizard-nav-container">',
-						'<ul class="nav nav-list" style="padding-bottom:30px;">',
-						'</ul>',
-					'</div>',
-					'<div class="wizard-progress-container">',,
-						'<div class="progress progress-striped">',
-							'<div class="bar"></div>',
-						'</div>',
-					'</div>',
-				'</div>',
-
-				'<form>',
-					'<div class="wizard-cards">',
-						'<div class="wizard-card-container">',
-						'</div>',
-						'<div class="wizard-modal-footer">',
-							'<div class="wizard-buttons-container">',
-								'<button class="btn wizard-cancel wizard-close" type="button">Cancel</button>',
-								'<div class="btn-group-single pull-right">',
-									'<button class="btn wizard-back" type="button">Back</button>',
-									'<button class="btn btn-primary wizard-next" type="button">Next</button>',
+							'<form>',
+								'<div class="wizard-cards">',
+									'<div class="wizard-card-container">',
+									'</div>',
+									'<div class="wizard-footer">',
+										'<div class="wizard-buttons-container">',
+											'<button class="btn wizard-cancel wizard-close" type="button">Cancel</button>',
+											'<div class="btn-group-single pull-right">',
+												'<button class="btn wizard-back" type="button">Back</button>',
+												'<button class="btn btn-primary wizard-next" type="button">Next</button>',
+											'</div>',
+										'</div>',
+									'</div>',
 								'</div>',
-							'</div>',
+							'</form>',
 						'</div>',
+					
 					'</div>',
-				'</form>',
-
+				'</div>',
 			'</div>'
-		];
-
+        ];
+		
 		this.args = {
+			keyboard: true,
+			show: false,
 			submitUrl: "",
 			width: 750,
 			showCancel: false,
 			showClose: true,
 			progressBarCurrent: false,
 			increaseHeight: 0,
+			contentHeight: 300,
+			contentWidth: 580,
 			buttons: {
 				cancelText: "Cancel",
 				nextText: "Next",
 				backText: "Back",
 				submitText: "Submit",
 				submittingText: "Submitting...",
-			},
-			isModal: true
+			}
 		};
+		
 		$.extend(this.args, args || {});
-
-		var wizard_template = this.args.isModal ? wizard_template_modal : wizard_template_no_modal;
+		
+		//var wizard_template = this.args.isModal ? wizard_template_modal : wizard_template_no_modal;
 
 		// When not in modal buttons "Cancel" or "Closed" don't make much sense
 		if (!this.args.isModal) {
 			this.args.showCancel = false;
 			this.args.showClose = false;
 		}
-
-		this.markup = $(markup);
-		this.submitCards = this.markup.find(".wizard-error,.wizard-failure,.wizard-success,.wizard-loading");
-		this.el = $(wizard_template.join("\n"));
-		this.el.find(".wizard-card-container")
-			.append(this.markup.find(".wizard-card"))
-			.append(this.submitCards);
-		$("body").append(this.el);
-
-		this.closeButton = this.el.find("button.wizard-close");
-		this.footer = this.el.find(".wizard-modal-footer");
-		this.cancelButton = this.footer.find(".wizard-cancel");
-		this.backButton = this.footer.find(".wizard-back");
-		this.nextButton = this.footer.find(".wizard-next");
-		this.progress = this.el.find(".progress");
-		this._cards = [];
-		this.cards = {};
-		this._readyToSubmit = false;
-		this.percentComplete = 0;
-		this._submitting = false;
-		this._events = {};
-		this._firstShow = true;
-
-
-		// construction
-
-
-		this._createCards();
-
-		this.nextButton.click(this, this._handleNextClick);
-		this.backButton.click(this, this._handleBackClick);
-
-		this.cancelButton.text(this.args.buttons.cancelText);
-		this.backButton.text(this.args.buttons.backText);
-		this.nextButton.text(this.args.buttons.nextText);
-
-
-
-		/*
-		 * adjust the height of the modal, and everything associated with
-		 * adjusting the height
-		 */
-		var baseHeight = 360;
-		var navHeight = baseHeight + this.args.increaseHeight;
-
-		this.el.find(".wizard-nav-container").css("height", navHeight);
-		this.el.find(".wizard-steps").css("height", (navHeight+65)+"px");
-		this.el.find(".wizard-card").css("height", (navHeight-60)+"px");
-		this.submitCards.css("height", (navHeight-60)+"px");
-
-		if (this.args.isModal) {
-			this.el.css("margin-top", -(this.el.height() / 2));	
-		}
 		
-
-
-		/*
-		 * adjust the width of the modal
-		 */
-		this.el.css("width", this.args.width);
-		if (this.args.isModal) {
-			this.el.css("margin-left", -(this.args.width / 2));
-		}
+		this._create(markup);
+	};
+	
+	Wizard.prototype = {
+		log: function() {
+			if (!window.console || !$.fn.wizard.logging) {return;}
+			var prepend = "wizard "+this.el.id+": ";
+			var args = [prepend];
+			args.push.apply(args, arguments);
+			console.log.apply(console, args);
+		},
 		
+		_create: function(markup) {
+			this.markup = $(markup);
+			this.title					= 	this.markup.data('title');
+			this.submitCards 			= 	this.markup.find(".wizard-error,.wizard-failure,.wizard-success,.wizard-loading");
+			this.el						=	$(this.wizard_template.join('\n'));
+			$('body').append(this.el);
+			
+			this.modal 					= 	this.el.modal({
+				keyboard: this.args.keyboard,
+				show: this.args.show
+			});
+			
+			this.dimensions				=	{
+												contentHeight: this.args.contentHeight,
+												contentWidth: this.args.contentWidth
+											};
+			this.dialog 				=	this.modal.find('.wizard-dialog');
+			this.content 				= 	this.modal.find('.wizard-content');
+			this.header 				= 	this.modal.find('.wizard-header');
+			this.body 					= 	this.modal.find('.wizard-body');
+			this.wizardSteps			= 	this.modal.find('.wizard-steps');
+			this.wizardCards			=	this.modal.find('.wizard-cards');
+			this.wizardCardContainer	=	this.modal.find('.wizard-card-container');
+			this.wizardCardContainer
+				.append(this.markup.find('.wizard-card'))
+				.append(this.submitCards);
+			this.navContainer 			= 	this.modal.find('.wizard-nav-container');
+			this.navList				= 	this.modal.find('.wizard-nav-list');
+			this.progressContainer		= 	this.modal.find('.wizard-progress-container');
+			this.progress				= 	this.progressContainer.find('.progress-bar');
+			this.closeButton 			= 	this.modal.find('button.wizard-close');
+			this.cardsContainer			=	this.modal.find('wizard-cards-container');
+			this.footer 				= 	this.modal.find(".wizard-footer");
+			this.cancelButton 			= 	this.footer.find(".wizard-cancel");
+			this.backButton 			= 	this.footer.find(".wizard-back");
+			this.nextButton 			= 	this.footer.find(".wizard-next");
+			
+			this._cards 				= 	[];
+			this.cards 					= 	{};
+			this._readyToSubmit 		= 	false;
+			this.percentComplete 		=	0;
+			this._submitting 			= 	false;
+			this._events 				= 	{};
+			this._firstShow 			= 	true;
+			
+			this._createCards();
 
+			this.nextButton.click(this, this._handleNextClick);
+			this.backButton.click(this, this._handleBackClick);
 
-
-		/*
-		 * set up slimScroll for our nav, if slimScroll is installed
-		 */
-		if ($.fn.slimScroll && false) {
-			var slimScrollArgs = {
-				position: "left",
-				height: "360px",
-				size: "8px",
-				distance: "5px",
-				railVisible: true,
-				disableFadeOut: true,
-			};
-			$.extend(slimScrollArgs, this.args.slimScroll || {});
-			this.el.find(".wizard-nav-container").slimScroll(slimScrollArgs);
-		}
-
-		/*
-		 * if the close X is clicked, reset the wizard
-		 */
-		var self = this;
-		this.closeButton.click(function() {
-			self.reset();
-			self.close();
-			self.trigger("closed");
-		});
-
-		this.el.find(".wizard-steps").on(
-			"click", "li.already-visited a.wizard-nav-link", this,
+			this.cancelButton.text(this.args.buttons.cancelText);
+			this.backButton.text(this.args.buttons.backText);
+			this.nextButton.text(this.args.buttons.nextText);
+			
+			// Register Close Button
+			var self = this;
+			this.closeButton.click(function() {
+				self.reset();
+                self.close();
+                self.trigger("closed");
+			});
+			
+			this.wizardSteps.on("click", "li.already-visited a.wizard-nav-link", this,
 			function(event) {
 				var index = parseInt($(event.target).data("navindex"));
 				event.data.setCard(index);
 			});
+			
+			if ( this.title.length != 0 ) {
+				this.setTitle(this.title);
+			}
+			
+			this.on("submit", this._defaultSubmit);
+			
+			// Set Modal Dimensions
+			this.autoDimensions();
+		},
+		
+		autoDimensions: function() {
+			// DO NOT REMOVE DISPLAY ; Temporary display is required for calculation
+			this.modal.css('display', 'block');
+			
+			this.dimensions.header = this.header.outerHeight(true);
+			this.log('Header Height: ', this.dimensions.header);
+			
+			// Navigation Pane is dyanmic build on card content
+			// Navigation Pane === BASE Inner Content Height
+			this.dimensions.navigation = this.wizardSteps.outerHeight(true);
+			this.log(this.dimensions.contentHeight);
+			if ( this.dimensions.navigation < this.dimensions.contentHeight ) {
+				this.dimensions.navigation = this.dimensions.contentHeight;
+				this.navContainer.height( (this.dimensions.contentHeight-30) - this.progressContainer.outerHeight(true));
+			}
+			
+			// Dimension Alias ( Body Height === (Navigation Height) )
+			this.dimensions.body = this.dimensions.navigation;
+			
+			// Modal Height === (Header + Content)
+			this.dimensions.modal = (this.dimensions.header + this.dimensions.navigation);
+			this.log('Content Modal Height: ', this.dimensions.modal);
+			this.content.height(this.dimensions.modal + 'px');
+			this.dialog.width(this.dimensions.contentWidth);
+			
+			this.body.height(this.dimensions.body + 'px');
+			this.wizardCards.height(this.dimensions.body + 'px');
+			
+			// Footer Height
+			this.dimensions.footer = this.footer.outerHeight(true);
+			
+			// Card Container === (Body - Footer)
+			this.dimensions.cardContainer = (this.dimensions.body - this.dimensions.footer);
+			this.wizardCardContainer.height(this.dimensions.cardContainer);
+			
+			// DO NOT REMOVE NEXT LINE
+			this.modal.css('display', '');
+		},
+		
+		setTitle: function(title) {
+			this.log("setting title to", title);
+			this.modal.find(".wizard-title").first().text(title);
+			return this;
+		},
 
-		var title = this.markup.children("h1").first();
-		if (title.length) {this.setTitle(title.text());}
-
-		this.on("submit", this._defaultSubmit);
-	};
-
-	Wizard.prototype = {
-
+		setSubtitle: function(title) {
+			this.log("setting subtitle to", title);
+			this.modal.find(".wizard-subtitle").first().text(title);
+			return this;
+		},
+		
 		errorPopover: function(el, msg) {
 			this.log("launching popover on", el);
 			var popover = el.popover({
@@ -587,7 +594,7 @@
 		hidePopovers: function(el) {
 			this.log("hiding all popovers");
 			var self = this;
-			this.el.find(".error-popover").each(function (i, popover) {
+			this.modal.find(".error-popover").each(function (i, popover) {
 				self.destroyPopover(popover);
 			});
 		},
@@ -612,18 +619,6 @@
 			return currentCard;
 		},
 
-		setTitle: function(title) {
-			this.log("setting title to", title);
-			this.el.find(".wizard-title").first().text(title);
-			return this;
-		},
-
-		setSubtitle: function(title) {
-			this.log("setting subtitle to", title);
-			this.el.find(".wizard-subtitle").first().text(title);
-			return this;
-		},
-
 		changeNextButton: function(text, cls) {
 			this.log("changing next button, text: " + text, "class: " + cls);
 			if (typeof(cls) != "undefined") {
@@ -639,13 +634,13 @@
 
 		hide: function() {
 			this.log("hiding");
-			this.args.isModal ? this.el.modal("hide") : this.el.css("display", "none");
+			this.modal.modal("hide");
 			return this;
 		},
 
 		close: function() {
 			this.log("closing");
-			this.args.isModal ? this.el.modal("hide") : this.el.css("display", "none");
+			this.modal.modal("hide");
 			return this;
 		},
 
@@ -658,11 +653,7 @@
 			}
 			if (this.args.showCancel) { this.cancelButton.show(); }
 			if (this.args.showClose) { this.closeButton.show(); }
-			if (this.args.isModal) {
-				this.el.modal(modalOptions);
-			} else {
-				this.el.css("display", "block");
-			}
+			this.modal.modal('show');
 			
 			return this;
 		},
@@ -716,16 +707,7 @@
 			this.trigger("reset");
 			return this;
 		},
-
-		log: function() {
-			if (!window.console || !$.fn.wizard.logging) {return;}
-			var prepend = "wizard "+this.el.id+": ";
-			var args = [prepend];
-			args.push.apply(args, arguments);
-			console.log.apply(console, args);
-		},
-
-
+		
 		/*
 		 * this handles switching to the next card or previous card, taking
 		 * care to skip over disabled cards
@@ -860,18 +842,18 @@
 
 		updateProgressBar: function(percent) {
 			this.log("updating progress to " + percent + "%");
-			this.progress.find(".bar").css({width: percent + "%"});
+			this.progress.css({width: percent + "%"});
 			this.percentComplete = percent;
 
 			this.trigger("progressBar", percent);
 
 			if (percent == 100) {
 				this.log("progress is 100, animating progress bar");
-				this.progress.addClass("active");
+				this.progressContainer.find('.progress').addClass("active");
 			}
 			else if (percent == 0) {
 				this.log("progress is 0, disabling animation");
-				this.progress.removeClass("active");
+				this.progressContainer.find('.progress').removeClass("active");
 			}
 		},
 
@@ -917,7 +899,7 @@
 		showButtons: function() {
 			this.log("showing buttons");
 			if (this.args.showCancel) { this.cancelButton.show(); }
-			if (this.args.showClose) {this.closeButton.show()};
+			if (this.args.showClose) { this.closeButton.show(); };
 			this.nextButton.show();
 			this.backButton.show();
 			return this;
@@ -947,10 +929,13 @@
 			var currentCard = null;
 			var wizard = this;
 			var self = this;
+			
+			self.log("Creating Cards");
 
-			var cards = this.el.find(".wizard-cards .wizard-card");
+			var cards = this.modal.find(".wizard-cards .wizard-card");
 			$.each(cards, function(i, card) {
 				card = $(card);
+				self.log(card);
 
 				prev = currentCard;
 				currentCard = new WizardCard(wizard, card, i, prev, next);
@@ -960,7 +945,7 @@
 				}
 				if (prev) {prev.next = currentCard;}
 
-				self.el.find(".wizard-steps .nav-list").append(currentCard.nav);
+				self.modal.find(".wizard-steps .wizard-nav-list").append(currentCard.nav);
 			});
 		},
 
@@ -1076,7 +1061,6 @@
 			var currentCard = this.decrementCard();
 		},
 
-
 		_handleNextClick: function(event) {
 			var wizard = event.data;
 			wizard._onNextClick.call(wizard);
@@ -1110,7 +1094,7 @@
 		    	},
 	    	});
 		}
-
 	};
-
+	
+	
 }(window.jQuery));
