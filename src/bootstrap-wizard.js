@@ -263,11 +263,16 @@
 
 				if (!ret.status) {
 					failures = true;
-					el.parent(".control-group").toggleClass("error", true);
+					el.parents("div.form-group").toggleClass("has-error", true);
+					
+					if ( $('#btn-' + el.attr('id')).length === 1 ) {
+						el = $('#btn-' + el.attr('id'));
+					}
+					
 					self.wizard.errorPopover(el, ret.msg);
 				}
 				else {
-					el.parent(".control-group").toggleClass("error", false);
+					el.parents("div.form-group").toggleClass("has-error", false);
 					try {
 						el.popover("destroy");
 					}
@@ -366,7 +371,7 @@
 									'</div>',
 								'</div>',
 							'</div>',
-							'<form>',
+							'<form class="form-horizontal">',
 								'<div class="wizard-cards">',
 									'<div class="wizard-card-container">',
 									'</div>',
@@ -484,6 +489,8 @@
 			this.backButton.text(this.args.buttons.backText);
 			this.nextButton.text(this.args.buttons.nextText);
 			
+			this.popovers				= [];
+			
 			// Register Close Button
 			var self = this;
 			this.closeButton.click(function() {
@@ -513,12 +520,10 @@
 			this.modal.css('display', 'block');
 			
 			this.dimensions.header = this.header.outerHeight(true);
-			this.log('Header Height: ', this.dimensions.header);
 			
 			// Navigation Pane is dyanmic build on card content
 			// Navigation Pane === BASE Inner Content Height
 			this.dimensions.navigation = this.wizardSteps.outerHeight(true);
-			this.log(this.dimensions.contentHeight);
 			if ( this.dimensions.navigation < this.dimensions.contentHeight ) {
 				this.dimensions.navigation = this.dimensions.contentHeight;
 				this.navContainer.height( (this.dimensions.contentHeight-30) - this.progressContainer.outerHeight(true));
@@ -529,7 +534,6 @@
 			
 			// Modal Height === (Header + Content)
 			this.dimensions.modal = (this.dimensions.header + this.dimensions.navigation);
-			this.log('Content Modal Height: ', this.dimensions.modal);
 			this.content.height(this.dimensions.modal + 'px');
 			this.dialog.width(this.dimensions.contentWidth);
 			
@@ -563,21 +567,25 @@
 			this.log("launching popover on", el);
 			var popover = el.popover({
 				content: msg,
-				trigger: "manual"
-			}).popover("show").next(".popover");
+				trigger: "manual",
+				container: el.parents('.form-group')
+			}).addClass("error-popover").popover("show").next(".popover");
 
-			popover.addClass("error-popover");
+			el.parents('.form-group').find('.popover').addClass("error-popover");
+			
+			this.popovers.push(el);
+			
 			return popover;
 		},
 		
 		destroyPopover: function(pop) {
 			pop = $(pop);
-			pop.parent(".control-group").toggleClass("error", false);
 			
 			/*
 			 * this is the element that the popover was created for
 			 */
-			var el = pop.prev();
+			//var el = pop.prev();
+			var el = pop;
 			
 			try {
 				el.popover("destroy");
@@ -594,9 +602,13 @@
 		hidePopovers: function(el) {
 			this.log("hiding all popovers");
 			var self = this;
-			this.modal.find(".error-popover").each(function (i, popover) {
-				self.destroyPopover(popover);
+
+			$.each(this.popovers, function(i, p) {
+				self.destroyPopover(p);
 			});
+			
+			this.modal.find('.has-error').removeClass('has-error');
+			this.popovers = [];
 		},
 
 		eachCard: function(fn) {
@@ -935,7 +947,6 @@
 			var cards = this.modal.find(".wizard-cards .wizard-card");
 			$.each(cards, function(i, card) {
 				card = $(card);
-				self.log(card);
 
 				prev = currentCard;
 				currentCard = new WizardCard(wizard, card, i, prev, next);
@@ -987,13 +998,15 @@
 		},
 
 		serializeArray: function() {
-			var form = this.el.children("form").first();
-			return form.serializeArray();
+			//var form = this.modal.children("form").first();
+			//return form.serializeArray();
+			return this.modal.find('form').serializeArray();
 		},
 
 		serialize: function() {
-			var form = this.el.children("form").first();
-			return form.serialize();
+			//var form = this.modal.children("form").first();
+			//return form.serialize();
+			return this.modal.find('form').serialize();
 		},
 
 
@@ -1082,16 +1095,14 @@
 	    		type: "POST",
 	    		url: wizard.args.submitUrl,
 	    		data: wizard.serialize(),
-	    		dataType: "json",
-	    		success: function(resp) {
-		    		wizard.submitSuccess();
-		    		wizard.hideButtons();
-		    		wizard.updateProgressBar(0);
-		    	},
-		    	error: function() {
-		    		wizard.submitFailure();
-		    		wizard.hideButtons();
-		    	},
+	    		dataType: "json"
+	    	}).done(function(response) {
+	    		wizard.submitSuccess();
+	    		wizard.hideButtons();
+	    		wizard.updateProgressBar(0);
+	    	}).fail(function() {
+	    		wizard.submitFailure();
+	    		wizard.hideButtons();
 	    	});
 		}
 	};
