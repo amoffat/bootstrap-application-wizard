@@ -10,3 +10,7 @@ Thanks to:
 * [Jason Abate](https://github.com/jasonabate)
 * [John Zimmerman](https://github.com/johnzimmerman)
 * [Shabbir Karimi](https://github.com/shabbirkarimi)
+
+
+Updated Code
+- Wizard header (h1) is now replaced by attribute: 'data-title'
