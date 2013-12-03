@@ -268,9 +268,9 @@
 					el.parents("div.form-group").toggleClass("has-error", true);
 					
 					// Add-On
-					// This allows the use of a INPUT+BTN used as one according to boostrap layout
-					// for the wizard it is required to add an id with btn-(ID of Input)
-					// this will make sure the popover is drawn on the correct element
+                    // This allows the use of a INPUT+BTN used as one according to boostrap layout
+                    // for the wizard it is required to add an id with btn-(ID of Input)
+                    // this will make sure the popover is drawn on the correct element
 					if ( $('#btn-' + el.attr('id')).length === 1 ) {
 						el = $('#btn-' + el.attr('id'));
 					}
@@ -345,16 +345,6 @@
 	};
 	
 	Wizard = function(markup, args) {
-		
-		/*
-		 * TO BE REMOVED TEMP
-		 * 
-		 * 
-    	'<li class="wizard-nav-item"><a class="wizard-nav-link" href="#"><span class="glyphicon glyphicon-chevron-right"></span> Label</a></li>',
-    	'<li class="wizard-nav-item"><a class="wizard-nav-link" href="#"><span class="glyphicon glyphicon-chevron-right"></span> Address</a></li>',
-    	'<li class="wizard-nav-item"><a class="wizard-nav-link" href="#"><span class="glyphicon glyphicon-chevron-right"></span> Contacts</a></li>',
-    	'<li class="wizard-nav-item"><a class="wizard-nav-link" href="#"><span class="glyphicon glyphicon-chevron-right"></span> Comments</a></li>',
-		 */
 		
 		/* TEMPLATE */
 		this.wizard_template = [
@@ -577,10 +567,8 @@
 				container: el.parents('.form-group')
 			}).addClass("error-popover").popover("show").next(".popover");
 
-			// Updated to work with Bootstrap3
 			el.parents('.form-group').find('.popover').addClass("error-popover");
 			
-			// Store popover for destruction
 			this.popovers.push(el);
 			
 			return popover;
