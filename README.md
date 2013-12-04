@@ -175,14 +175,13 @@ Wizard
     <tr>
         <td>buttons</td>
         <td>array</td>
-        <td>
+        <td colspan="2">
             cancelText: "Cancel"<br />
             nextText: "Next"<br />
             backText: "Back"<br />
             submitText: "Submit"<br />
             submittingText: "Submitting..."<br />
         </td>
-        <td></td>
     </tr>
 </table>
 
