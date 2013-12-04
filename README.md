@@ -163,6 +163,29 @@ Logging can be turned on by setting logging setting before wizard initialization
 $.fn.wizard.logging = true;
 ```
 
+Wizard Methods
+--------------
+Usage:
+```javascript
+var wizard = $("#some-wizard").wizard({});
+
+wizard.methodName(arguments);
+```
+
+<table>
+    <tr>
+        <th>Method</th>
+        <th>Arguments</th>
+        <th>Argument type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        
+    </tr>
+</table>
+
 Wizard Events
 -------------
 You can register on the follwing wizard events with jQuery's `on` function.
