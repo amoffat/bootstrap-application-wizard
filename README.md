@@ -71,7 +71,15 @@ Basic Wizard Template
 </div>
 ```
 
+#### 3) Initialize Wizard ####
+After setting up the wizard with it's cards you can initilize it.
 
+```javascript
+$(function() {
+    var options = {};
+    var wizard = $("#some-wizard").wizard(options);
+});
+```
 
 
 
