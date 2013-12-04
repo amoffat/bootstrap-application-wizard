@@ -186,7 +186,7 @@ Wizard
 </table>
 
 
-Logging can be turned on by setting logging setting before wizard initialization
+Logging can be turned on by setting logging before wizard initialization
 ```javascript
 $.fn.wizard.logging = true;
 ```
