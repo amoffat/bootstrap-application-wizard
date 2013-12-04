@@ -329,8 +329,82 @@ wizard.on("reset", function() {
 
 #### Submitting Wizard ####
 
-TODO
+The easiest way to submit data to the wizard is to pass in a submitUrl on construction.
+```javascript
+var wizard = $("#some-wizard").wizard({submitUrl: "/some_url"});
+```
 
+When the wizard reaches its last step and the user clicks the submit button, all of the inputs from all of the wizard cards will be aggregated together and POSTed to your submitUrl.
+
+If you wish to implement your own submit listener, take a look at the source of the Wizard._defaultSubmit method, which is the default submit listener.
+```javascript
+function(wizard) {
+    $.ajax({
+        type: "POST",
+	    url: wizard.args.submitUrl,
+	    data: wizard.serialize(),
+	    dataType: "json"
+    }).done(function(response) {
+        wizard.submitSuccess();
+        wizard.hideButtons();
+        wizard.updateProgressBar(0);
+    }).fail(function() {
+        wizard.submitFailure();
+        wizard.hideButtons();
+    });
+}
+```
+
+The wizard class implements the serialize() and serializeArray() methods of jQuery form elements. These methods will scan through all the form input elements in your wizard cards, aggregate the names and values, and return a data structure for submitting via an ajax call.
+
+After your submission, depending on whether your submission succeeded, failed, or had an error, you can display a specific hidden card to reflect the submission status. These submission cards must first be defined in the html.
+```html
+<div class="wizard" id="some-wizard">
+    <!-- normal wizard cards: -->
+ 
+    <div class="wizard-card" data-cardname="card1">
+        <h3>Card 1</h3>
+        <div>...</div>
+    </div>
+ 
+    <!-- begin special status cards below: -->
+ 
+    <div class="wizard-success">
+        submission succeeded!
+    </div>
+ 
+    <div class="wizard-error">
+        submission had an error
+    </div>
+ 
+    <div class="wizard-failure">
+        submission failed
+    </div>
+</div>
+```
+
+These 3 cards are hidden by default and only appear when you specifically activate them. Typically, these cards will be activated by status of an ajax post.
+```javascript
+wizard.on("submit", function(wizard) {
+    $.ajax({
+        url: "/wizard_submit_url",
+        type: "POST",
+	    url: wizard.args.submitUrl,
+	    data: wizard.serialize(),
+	    dataType: "json"
+    }).done(function(response) {
+        wizard.submitSuccess();         // displays the success card
+        wizard.hideButtons();           // hides the next and back buttons
+        wizard.updateProgressBar(0);    // sets the progress meter to 0
+    }).fail(function() {
+        wizard.submitError();           // display the error card
+        wizard.hideButtons();           // hides the next and back buttons
+    });
+}
+```
+By activating these cards in the ajax request handlers, you can display information relevant to the status of the submit request
+
+After submission, you may wish to reset the wizard to some default state.  See the [reset()] method in the wizard class for details on this.
 
 
 Wizard Cards
