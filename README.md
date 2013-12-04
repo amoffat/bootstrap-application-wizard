@@ -81,6 +81,24 @@ $(function() {
 ```
 
 
+Wizard Options
+--------------
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+Logging can be turned on by setting logging to ```javascript true````
 
 
 To be Removed
