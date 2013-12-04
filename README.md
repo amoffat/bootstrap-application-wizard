@@ -163,6 +163,67 @@ Logging can be turned on by setting logging setting before wizard initialization
 $.fn.wizard.logging = true;
 ```
 
+Wizard Events
+-------------
+You can register on the follwing wizard events with jQuery's `on` function.
+
+Example registering on the reset event
+```javascript
+var wizard = $("#some-wizard").wizard({});
+
+wizard.on("reset", function() {
+    // Some reset actions
+});
+```
+
+<table>
+    <tr>
+        <th>Event</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>reset</td>
+        <td>Reset event is called when the dialog is either closed or when submit is done</td>
+    </tr>
+    <tr>
+        <td>submit</td>
+        <td>Triggers on the submit of the wizard</td>
+    </tr>
+    <tr>
+        <td>closed</td>
+        <td>Triggers when the wizard is closed</td>
+    </tr>
+    <tr>
+        <td>incrementCard</td>
+        <td>Triggers when the user clicks next</td>
+    </tr>
+    <tr>
+        <td>decrementCard</td>
+        <td>Triggers when the user click back</td>
+    </tr>
+    <tr>
+        <td>progressBar</td>
+        <td>Triggers when the progress bar is updated, the new percentage of the progressbar is supplied as argument</td>
+    </tr>
+    <tr>
+        <td>submitSuccess</td>
+        <td>Trigger when submit was succesfull</td>
+    </tr>
+    <tr>
+        <td>submitFailure</td>
+        <td>Trigger when submit failed</td>
+    </tr>
+    
+    <tr>
+        <td>submitError</td>
+        <td>Triggers when submit encounters an error</td>
+    </tr>
+    <tr>
+        <td>loading</td>
+        <td>Triggers after the submit event</td>
+    </tr>
+</table>
+
 
 Working with cards
 ------------------
