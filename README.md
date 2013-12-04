@@ -168,6 +168,7 @@ $.fn.wizard.logging = true;
 ```
 
 
+
 #### Wizard Methods ####
 Usage:
 ```javascript
@@ -251,6 +252,7 @@ wizard.methodName(arguments);
         <td>Resets the wizard to its original state.  This only resets wizard internals, and does not affect your form elements. If you want to reset those, listen for the `reset` event, and write some code to reset your elements manually.</td>
     </tr>
 </table>
+
 
 
 #### Wizard Events ####
