@@ -18,7 +18,15 @@ Update bootstrap v3.x
 * [Gert-Jan Timmer] (https://github.com/GJRTimmer)
 
 Contributors
-* 
+* [Andrew Moffat] (https://github.com/amoffat)
+* [bryancallahan] (https://github.com/bryancallahan)
+* [che-burashco] (https://github.com/che-burashco)
+* [bluetidepro] (https://github.com/bluetidepro)
+* [david-proweb] (https://github.com/david-proweb)
+* [kachar] (https://github.com/kachar)
+* [ludokx] (https://github.com/ludokx)
+* [choudeshell] (https://github.com/choudeshell)
+
 
 Dependencies
 ------------
