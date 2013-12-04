@@ -522,16 +522,20 @@ For example within the following card setup. The card uses standard bootstrap v3
 This will cause the error-popop to be correctly displayed when there is an validation error.
 
 ```html
-<div class="wizard-input-section">
-	<p>Full Qualified Domain Name</p>
+<div class="wizard-card" data-cardname="address">
+	<h3>Address</h3>
 
-	<div class="form-group">
-		<div class="col-sm-8">
-			<div class="input-group">
-				<input type="text" class="form-control" id="fqdn" name="fqdn" placeholder="FQDN" data-validate="validateFQDN" data-is-valid="0" data-lookup="0" />
-				<span class="input-group-btn" id="btn-fqdn">
-		        	<button class="btn btn-default" type="button" onclick='lookup();'>Lookup</button>
-				</span>
+	<div class="wizard-input-section">
+		<p>Full Qualified Domain Name</p>
+	
+		<div class="form-group">
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input type="text" class="form-control" id="fqdn" name="fqdn" placeholder="FQDN" data-validate="validateFQDN" data-is-valid="0" data-lookup="0" />
+					<span class="input-group-btn" id="btn-fqdn">
+			        	<button class="btn btn-default" type="button" onclick='lookup();'>Lookup</button>
+					</span>
+				</div>
 			</div>
 		</div>
 	</div>
