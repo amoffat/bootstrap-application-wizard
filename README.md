@@ -91,6 +91,78 @@ Wizard Options
         <th>Description</th>
     </tr>
     <tr>
+        <td>keyboard</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Closes the modal when escape key is pressed.</td>
+    </tr>
+    <tr>
+        <td>show</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Shows the modal when initialized.</td>
+    </tr>
+    <tr>
+        <td>showCancel</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Show cancel button when initialized.</td>
+    </tr>
+    <tr>
+        <td>showClose</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Show close button when initialized</td>
+    </tr>
+    <tr>
+        <td>progressBarCurrent</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>increateHeight</td>
+        <td>integer</td>
+        <td>0</td>
+        <td>Deprecated</td>
+    </tr>
+    <tr>
+        <td>width</td>
+        <td>integer</td>
+        <td>750</td>
+        <td>Deprecated</td>
+    </tr>
+    <tr>
+        <td>contentHeight</td>
+        <td>integer</td>
+        <td>300</td>
+        <td>Default height of content view</td>
+    </tr>
+    <tr>
+        <td>contentWidth</td>
+        <td>integer</td>
+        <td>580</td>
+        <td>Default width of wizard</td>
+    </tr>
+    <tr>
+        <td>buttons</td>
+        <td>array</td>
+        <td>
+            cancelText: "Cancel",<br />
+            nextText: "Next",<br />
+            backText: "Back",<br />
+            submitText: "Submit",<br />
+            submittingText: "Submitting..."<br />
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
         <td></td>
         <td></td>
         <td></td>
