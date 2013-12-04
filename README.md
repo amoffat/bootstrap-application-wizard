@@ -98,7 +98,10 @@ Wizard Options
     </tr>
 </table>
 
-Logging can be turned on by setting logging to ```javascript true````
+Logging can be turned on by setting logging setting before wizard initialization
+```javascript
+$.fn.wizard.logging = true;
+```
 
 
 To be Removed
