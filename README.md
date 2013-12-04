@@ -164,5 +164,47 @@ $.fn.wizard.logging = true;
 ```
 
 
+Working with cards
+------------------
+
+#### Access Card ####
+Cards can be accessed through the cards attribute on the wizard object. By default, this is an object whose keys are the text from the h3 tags, and whose values are instances of the WizardCard class. So for example, with the following markup:
+```html
+<div class="wizard" id="some-wizard">
+    <div class="wizard-card">
+        <h3>Card 1</h3>
+        <div>...</div>
+    </div>
+</div>
+```
+
+You could access this card the following way:
+```javascript
+var wizard = $("#some-wizard").wizard();
+var card = wizard.cards["Card 1"];
+```
+
+From this card object, you can call any of the card methods.
+You can also set a card’s name specifically by using the `data-cardname` attribute
+```html
+<div class="wizard" id="some-wizard">
+    <div class="wizard-card" data-cardname="card1">
+        <h3>Card 1</h3>
+        <div>...</div>
+    </div>
+</div>
+```
+
+Now you can access the card by the name “card1″:
+```javascript
+var wizard = $("#some-wizard").wizard();
+var card = wizard.cards["card1"];
+```
+
+
+
+
+
+
 To be Removed
 # [Demo & Complete Documentation](http://www.panopta.com/2013/02/06/bootstrap-application-wizard/)
