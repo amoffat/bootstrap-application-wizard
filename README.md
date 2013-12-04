@@ -148,24 +148,12 @@ Wizard Options
         <td>buttons</td>
         <td>array</td>
         <td>
-            cancelText: "Cancel",<br />
-            nextText: "Next",<br />
-            backText: "Back",<br />
-            submitText: "Submit",<br />
+            cancelText: "Cancel"<br />
+            nextText: "Next"<br />
+            backText: "Back"<br />
+            submitText: "Submit"<br />
             submittingText: "Submitting..."<br />
         </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
         <td></td>
     </tr>
 </table>
