@@ -104,6 +104,12 @@ Wizard
         <td>true</td>
         <td>Closes the modal when escape key is pressed.</td>
     </tr>
+	<tr>
+        <td>backdrop</td>
+        <td>boolean or string `static`</td>
+        <td>true</td>
+        <td>Includes a modal-backdrop element. Alternatively, specify `static` for a backdrop which doesn't close the modal on click.</td>
+    </tr>
     <tr>
         <td>show</td>
         <td>boolean</td>

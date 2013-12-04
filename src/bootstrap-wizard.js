@@ -391,6 +391,7 @@
 		
 		this.args = {
 			keyboard: true,
+			backdrop: true,
 			show: false,
 			submitUrl: "",
 			width: 750,
@@ -440,7 +441,8 @@
 			
 			this.modal 					= 	this.el.modal({
 				keyboard: this.args.keyboard,
-				show: this.args.show
+				show: this.args.show,
+				backdrop: this.args.backdrop
 			});
 			
 			this.dimensions				=	{
