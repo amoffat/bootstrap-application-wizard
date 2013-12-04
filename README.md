@@ -10,6 +10,7 @@ Thanks to:
 * [Jason Abate](https://github.com/jasonabate)
 * [John Zimmerman](https://github.com/johnzimmerman)
 * [Shabbir Karimi](https://github.com/shabbirkarimi)
+* [Gert-Jan Timmer] (https://github.com/GJRTimmer)
 
 
 Updated Code
