@@ -124,6 +124,12 @@ Wizard
         <td></td>
     </tr>
     <tr>
+        <td>submitUrl</td>
+        <td>string</td>
+        <td>''</td>
+        <td>Default submit url</td>
+    </tr>
+    <tr>
         <td>increateHeight</td>
         <td>integer</td>
         <td>0</td>
