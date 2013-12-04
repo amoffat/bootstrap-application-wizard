@@ -14,8 +14,11 @@ Special Thanks
 * [John Zimmerman](https://github.com/johnzimmerman)
 * [Shabbir Karimi](https://github.com/shabbirkarimi)
 
-Contributors
+Update bootstrap v3.x
 * [Gert-Jan Timmer] (https://github.com/GJRTimmer)
+
+Contributors
+* 
 
 Dependencies
 ------------
