@@ -366,12 +366,136 @@ var card = wizard.cards["card1"];
 
 
 #### Validation ####
+Most wizard cards will require some kind of validation of the input before proceeding to the next card. This validation is not intended to sanitize malicious data to be trustworthy (this should be done server-side), merely to catch any obvious common problems with the data.
+
+Validation can be attached inline to form elements by using the attribute `data-validate` on the input.
+```html
+<div class="wizard-card">
+    <h3>Card 1</h3>
+    Name <input type="text" name="name" data-validate="validateName" />
+</div>
+```
+
+When the Next button is clicked for the card, validateName will be called with the element as its first argument.  Here’s an example validation function:
+
+```javascript
+function validateName(el) {
+    var name = el.val();
+    var retValue = {};
+ 
+    if (name == "") {
+        retValue.status = false;
+        retValue.msg = "Please enter a name";
+    }
+    else {
+        retValue.status = true;
+    }
+ 
+    return retValue;
+}
+```
+
+If the validator returns with an object with .status == false, then an error popup will display on the element and the wizard will not be allowed to progress to the next step. The wizard will only progress when all of the validators on the page return with a status of true.
+
+Entire cards may be assigned a validation function by using the `data-validate` attribute on the card.
+```html
+<div class="wizard-card" data-validate="someFunction">
+    <h3>Card 1</h3>
+    Some content
+</div>
+```
+
+`someFunction()` will receive a WizardCard object on which you can manually search for the inputs on that card and validate them.  This is useful for validating complex interdependencies between many inputs, for example, if a name field can only be empty if another field is populated.
+
+The final method for validating entire cards is to subscribe to the the “validate” event and provide a validation function.
+
+```javascript
+wizard.cards["Card 1"].on("validate", function(card) {
+    var input = card.el.find("input");
+    var name = input.val();
+    if (name == "") {
+        card.wizard.errorPopover(input, "Name cannot be empty");
+        return false;
+    }
+    return true;
+});
+```
+
+A card-level validation function is slightly different from an input-level validation function. In a card-level function, you are required to display any error popovers, using the wizard object’s errorPopover() method, as well as returning true or false to tell the wizard whether or not it should advance to the next step.
+
+
 
 
 #### Card Methods ####
+<table>
+    <tr>
+        <th>Method</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 
 
 #### Card Events ####
+Registering event on cards can be done with the jQuery `on(event, callback)` function on the wizardCard object.
+
+<table>
+    <tr>
+        <th>Event</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>loaded</td>
+        <td>Triggers when the card is first loaded (when the card is selected but has never been selected before). This is useful for lazy-loading content.</td>
+    </tr>
+    <tr>
+        <td>validate</td>
+        <td>when the card is being validated. The callback assigned to this can itself be used as a validator if it returns a boolean.</td>
+    </tr>
+    <tr>
+        <td>selected</td>
+        <td>Triggers when this card is selected as the active wizard card</td>
+    </tr>
+    <tr>
+        <td>deselect</td>
+        <td>Triggers when this card is changed from. The new card will receive the select event, and the old card will receive the deselect event.</td>
+    </tr>
+    <tr>
+        <td>enabled</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>disabled</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>reload</td>
+        <td>Triggers when the card is first loaded or when the reload() function is called.</td>
+    </tr>
+    <tr>
+        <td>validate</td>
+        <td>Called when the card is being validated. The callback assigned to this can serve as a validator itself, if it returns a boolean.</td>
+    </tr>
+    <tr>
+        <td>validated</td>
+        <td>Triggers when validation is done</td>
+    </tr>
+    <tr>
+        <td>invalid</td>
+        <td>Triggers when validation failed</td>
+    </tr>
+    <tr>
+        <td>markVisited</td>
+        <td>Triggers when this card is marked as visited, meaning, typically, that the user can go back to it from a different step</td>
+    </tr>
+    <tr>
+        <td>unmarkVisited</td>
+        <td>Triggers removing this card as a visited card</td>
+    </tr>
+</table>
 
 
 
