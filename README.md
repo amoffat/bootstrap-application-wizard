@@ -38,13 +38,42 @@ Usage
 #### 1) Create wizard ####
 
 ```html
-<div class="wizard" id="demo-wizard" data-title="New Satellite">
+<div class="wizard" id="demo-wizard" data-title="Wizard Title">
 </div>
 ```
 
 To set the title of the application wizard use the `data-title` attribute
 
 #### 2) Create wizard cards ####
+Each .wizard-card will be its own step in the Application Wizard, and the h3 tag will be used for its navigation name on the left.  Also notice the data-cardname  attribute on each card.  While not required, this can be used to access the cards by a specific name.
+
+Card Setup
+```html
+<div class="wizard-card" data-cardname="card1">
+    <h3>Card 1</h3>
+    Some content
+</div>
+```
+
+
+Basic Wizard Template
+```html
+<div class="wizard" id="demo-wizard" data-title="Wizard Title">
+    <div class="wizard-card" data-cardname="card1">
+        <h3>Card 1</h3>
+        Some content
+    </div>
+    
+    <div class="wizard-card" data-cardname="card2">
+        <h3>Card 2</h3>
+        Some content
+    </div>
+</div>
+```
+
+
+
+
 
 
 To be Removed
