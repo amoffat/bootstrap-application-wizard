@@ -81,8 +81,11 @@ $(function() {
 ```
 
 
-Wizard Options
---------------
+Wizard
+------
+
+
+#### Wizard Options ####
 <table>
     <tr>
         <th>Name</th>
@@ -158,19 +161,21 @@ Wizard Options
     </tr>
 </table>
 
+
 Logging can be turned on by setting logging setting before wizard initialization
 ```javascript
 $.fn.wizard.logging = true;
 ```
 
-Wizard Methods
---------------
+
+#### Wizard Methods ####
 Usage:
 ```javascript
 var wizard = $("#some-wizard").wizard({});
 
 wizard.methodName(arguments);
 ```
+
 
 <table>
     <tr>
@@ -247,8 +252,8 @@ wizard.methodName(arguments);
     </tr>
 </table>
 
-Wizard Events
--------------
+
+#### Wizard Events ####
 You can register on the follwing wizard events with jQuery's `on(eventName, callback)` function.
 
 Example registering on the reset event
@@ -259,6 +264,7 @@ wizard.on("reset", function() {
     // Some reset actions
 });
 ```
+
 
 <table>
     <tr>
@@ -313,10 +319,16 @@ wizard.on("reset", function() {
 </table>
 
 
-Working with cards
+#### Submitting Wizard ####
+
+TODO
+
+
+
+Wizard Cards
 ------------------
 
-#### Access Card ####
+#### Access ####
 Cards can be accessed through the cards attribute on the wizard object. By default, this is an object whose keys are the text from the h3 tags, and whose values are instances of the WizardCard class. So for example, with the following markup:
 ```html
 <div class="wizard" id="some-wizard">
@@ -351,9 +363,19 @@ var card = wizard.cards["card1"];
 ```
 
 
+#### Validation ####
+
+
+#### Card Methods ####
+
+
+#### Card Events ####
 
 
 
 
-To be Removed
-# [Demo & Complete Documentation](http://www.panopta.com/2013/02/06/bootstrap-application-wizard/)
+
+DEPRECATED
+----------
+
+[Demo & Complete Documentation](http://www.panopta.com/2013/02/06/bootstrap-application-wizard/)
