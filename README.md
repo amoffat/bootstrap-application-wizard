@@ -175,75 +175,75 @@ wizard.methodName(arguments);
 <table>
     <tr>
         <th>Method</th>
-        <th>Arguments</th>
-        <th>Argument type</th>
         <th>Description</th>
     </tr>
     <tr>
         <td>show()</td>
-        <td></td>
-        <td></td>
         <td>Displays the wizard</td>
     </tr>
     <tr>
         <td>hide()</td>
-        <td></td>
-        <td></td>
         <td>Alias for close()</td>
     </tr>
     <tr>
         <td>close()</td>
-        <td></td>
-        <td></td>
         <td>Closes the wizard</td>
     </tr>
     <tr>
         <td>serialize()</td>
-        <td></td>
-        <td></td>
         <td>Returns all inputs from the wizard as serialized string, see [jQuery serialize()] (http://api.jquery.com/serialize/)</td>
     </tr>
     <tr>
         <td>serializeArray()</td>
-        <td></td>
-        <td></td>
         <td>Returns all inputs from the wizard as array object, can be used for sending a JSON object to the server. See [jQuery serializeArray()] (http://api.jquery.com/serializeArray/)</td>
     </tr>
     <tr>
         <td>getActiveCard</td>
-        <td></td>
-        <td></td>
         <td>Returns a wizardCard object for the active card</td>
     </tr>
     <tr>
         <td>setTitle(title)</td>
-        <td>title</td>
-        <td>string</td>
         <td>Set the title of the wizard</td>
     </tr>
     <tr>
         <td>setSubtitle(subTitle)</td>
-        <td>subTitle</td>
-        <td>string</td>
         <td>Sets the secondary, less pronounced title in the wizard header</td>
     </tr>
     <tr>
         <td>errorPopover(element, msg)</td>
-        <td>element<br/>msg</td>
-        <td>element object<br />string</td>
-        <td>This creates an error popup on element, with content msg.  This is useful being called from a card-level validator, where you might want to pick specific elements on a card on which to show an error tooltip.</td>
+        <td>This creates an error popup on element, with content msg. This is useful being called from a card-level validator, where you might want to pick specific elements on a card on which to show an error tooltip.</td>
     </tr>
     <tr>
         <td>changeNextButton(text, [class])</td>
-        <td>text<br />class (optional)</td>
-        <td>string<br />string</td>
-        <td></td>
+        <td>Changes the “next” button (used to advance steps in the wizard) to have text text  and optionally css class cls.  This is used internally by the wizard when the last step is reached, to display a green “submit” button, but it may be useful elsewhere.</td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>updateProgressBar(percent)</td>
+        <td>Sets the progress bar in the lower right to percent complete. This typically shouldn’t be touched by user code, but it can be useful to call updateProgressBar(0) after a submit handler returns. [See Submitting Data].</td>
+    </tr>
+    <tr>
+        <td>hideButtons()</td>
+        <td>Hides the next and previous buttons. This is only really useful after a submission handler returns. [See Submitting Data].</td>
+    </tr>
+    <tr>
+        <td>showButtons()</td>
+        <td>Shows the next and previous buttons. This is only really useful after a submission handler returns. [See Submitting Data].</td>
+    </tr>
+    <tr>
+        <td>submitSuccess()</td>
+        <td>Shows the special submit cards. This is only really useful after a submission handler returns. [See Submitting Data].</td>
+    </tr>
+    <tr>
+        <td>submitError()</td>
+        <td>Shows the special submit cards. This is only really useful after a submission handler returns. [See Submitting Data].</td>
+    </tr>
+     <tr>
+        <td>submitFailure()</td>
+        <td>Shows the special submit cards. This is only really useful after a submission handler returns. [See Submitting Data].</td>
+    </tr>
+     <tr>
+        <td>reset()</td>
+        <td>Resets the wizard to its original state.  This only resets wizard internals, and does not affect your form elements. If you want to reset those, listen for the `reset` event, and write some code to reset your elements manually.</td>
     </tr>
 </table>
 
