@@ -180,15 +180,76 @@ wizard.methodName(arguments);
         <th>Description</th>
     </tr>
     <tr>
+        <td>show()</td>
         <td></td>
         <td></td>
-        
+        <td>Displays the wizard</td>
+    </tr>
+    <tr>
+        <td>hide()</td>
+        <td></td>
+        <td></td>
+        <td>Alias for close()</td>
+    </tr>
+    <tr>
+        <td>close()</td>
+        <td></td>
+        <td></td>
+        <td>Closes the wizard</td>
+    </tr>
+    <tr>
+        <td>serialize()</td>
+        <td></td>
+        <td></td>
+        <td>Returns all inputs from the wizard as serialized string, see [jQuery serialize()] (http://api.jquery.com/serialize/)</td>
+    </tr>
+    <tr>
+        <td>serializeArray()</td>
+        <td></td>
+        <td></td>
+        <td>Returns all inputs from the wizard as array object, can be used for sending a JSON object to the server. See [jQuery serializeArray()] (http://api.jquery.com/serializeArray/)</td>
+    </tr>
+    <tr>
+        <td>getActiveCard</td>
+        <td></td>
+        <td></td>
+        <td>Returns a wizardCard object for the active card</td>
+    </tr>
+    <tr>
+        <td>setTitle(title)</td>
+        <td>title</td>
+        <td>string</td>
+        <td>Set the title of the wizard</td>
+    </tr>
+    <tr>
+        <td>setSubtitle(subTitle)</td>
+        <td>subTitle</td>
+        <td>string</td>
+        <td>Sets the secondary, less pronounced title in the wizard header</td>
+    </tr>
+    <tr>
+        <td>errorPopover(element, msg)</td>
+        <td>element<br/>msg</td>
+        <td>element object<br />string</td>
+        <td>This creates an error popup on element, with content msg.  This is useful being called from a card-level validator, where you might want to pick specific elements on a card on which to show an error tooltip.</td>
+    </tr>
+    <tr>
+        <td>changeNextButton(text, [class])</td>
+        <td>text<br />class (optional)</td>
+        <td>string<br />string</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
 </table>
 
 Wizard Events
 -------------
-You can register on the follwing wizard events with jQuery's `on` function.
+You can register on the follwing wizard events with jQuery's `on(eventName, callback)` function.
 
 Example registering on the reset event
 ```javascript
@@ -210,7 +271,7 @@ wizard.on("reset", function() {
     </tr>
     <tr>
         <td>submit</td>
-        <td>Triggers on the submit of the wizard</td>
+        <td>Triggers when the submit button is clicked on the final card</td>
     </tr>
     <tr>
         <td>closed</td>
@@ -218,15 +279,15 @@ wizard.on("reset", function() {
     </tr>
     <tr>
         <td>incrementCard</td>
-        <td>Triggers when the user clicks next</td>
+        <td>Triggers  when the next card becomes the current card</td>
     </tr>
     <tr>
         <td>decrementCard</td>
-        <td>Triggers when the user click back</td>
+        <td>Triggers when the previous card becomes the current card</td>
     </tr>
     <tr>
         <td>progressBar</td>
-        <td>Triggers when the progress bar is updated, the new percentage of the progressbar is supplied as argument</td>
+        <td>Triggers when the progress bar is incremented.  The first argument passed to the callback is the new progress percent from 0 to 100.</td>
     </tr>
     <tr>
         <td>submitSuccess</td>
@@ -244,6 +305,10 @@ wizard.on("reset", function() {
     <tr>
         <td>loading</td>
         <td>Triggers after the submit event</td>
+    </tr>
+    <tr>
+        <td>readySubmit</td>
+        <td>Triggers when the wizard has reached its final card</td>
     </tr>
 </table>
 
