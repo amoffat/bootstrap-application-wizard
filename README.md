@@ -510,6 +510,35 @@ A card-level validation function is slightly different from an input-level valid
 
 
 
+#### Validation Error Popup ####
+##### Input with adjacent button #####
+Bootstrap has the possibility to have button adjacent to an input. This causes the error-popover to be misplaced.
+To correct this the error-popover has to be placed on the span of the adjacent button.
+
+To accomplish this the application wizard has smart detection for this. When creating an adjacent button to an input an additionial `id` has to be set on the adjacent `<span>` of the `button`. The `id` name of the span has to be `btn-(ID OF INPUT)`.
+
+For example within the following card setup. The card uses standard bootstrap v3.x code for an input with adjacent button. The id of the input is `fqdn`. The id of the adjacent span becomes `btn-fqdn`.
+
+This will cause the error-popop to be correctly displayed when there is an validation error.
+
+```html
+<div class="wizard-input-section">
+	<p>Full Qualified Domain Name</p>
+
+	<div class="form-group">
+		<div class="col-sm-8">
+			<div class="input-group">
+				<input type="text" class="form-control" id="fqdn" name="fqdn" placeholder="FQDN" data-validate="validateFQDN" data-is-valid="0" data-lookup="0" />
+				<span class="input-group-btn" id="btn-fqdn">
+		        	<button class="btn btn-default" type="button" onclick='lookup();'>Lookup</button>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+```
+
+
 
 #### Card Methods ####
 <table>
