@@ -38,8 +38,7 @@ Usage
 #### 1) Create wizard ####
 
 ```html
-<div class="wizard" id="demo-wizard" data-title="Wizard Title">
-</div>
+<div class="wizard" id="some-wizard" data-title="Wizard Title"></div>
 ```
 
 To set the title of the application wizard use the `data-title` attribute
@@ -56,9 +55,9 @@ Card Setup
 ```
 
 
-Basic Wizard Template
+Basic Wizard Setup
 ```html
-<div class="wizard" id="demo-wizard" data-title="Wizard Title">
+<div class="wizard" id="some-wizard" data-title="Wizard Title">
     <div class="wizard-card" data-cardname="card1">
         <h3>Card 1</h3>
         Some content
