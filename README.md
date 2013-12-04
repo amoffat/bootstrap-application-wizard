@@ -632,7 +632,6 @@ Registering event on cards can be done with the jQuery `on(event, callback)` fun
 
 
 
-DEPRECATED
-----------
+##### DEPRECATED #####
 
 [Demo & Complete Documentation](http://www.panopta.com/2013/02/06/bootstrap-application-wizard/)
