@@ -45,7 +45,7 @@ Usage
 To set the title of the application wizard use the `data-title` attribute
 
 #### 2) Create wizard cards ####
-Each .wizard-card will be its own step in the Application Wizard, and the h3 tag will be used for its navigation name on the left.  Also notice the data-cardname  attribute on each card.  While not required, this can be used to access the cards by a specific name.
+Each .wizard-card will be its own step in the Application Wizard, and the h3 tag will be used for its navigation name on the left.  Also notice the `data-cardname` attribute on each card. While not required, this can be used to access the cards by a specific name.
 
 Card Setup
 ```html
