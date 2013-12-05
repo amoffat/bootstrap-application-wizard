@@ -3,12 +3,7 @@
 	display:none;	
 }
 
-.wizard-dialog {
-	transform: translate(0, 50%) !important;
-	-ms-transform: translate(0, 50%) !important; /* IE 9 */
-	-webkit-transform: translate(0, 50%) !important; /* Safari and Chrome */
-}
-
+.wizard-dialog {}
 .wizard-content {}
 
 .wizard-body {

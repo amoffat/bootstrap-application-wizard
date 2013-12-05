@@ -545,6 +545,13 @@
 			this.dimensions.cardContainer = (this.dimensions.body - this.dimensions.footer);
 			this.wizardCardContainer.height(this.dimensions.cardContainer);
 			
+			// Reposition
+			this.dimensions.offset = ($(window).height() - this.dialog.height()) / 2;			
+			this.dialog.css({
+				'margin-top': this.dimensions.offset + 'px',
+				'padding-top': 0
+			});
+			
 			// DO NOT REMOVE NEXT LINE
 			this.modal.css('display', '');
 		},
