@@ -714,6 +714,9 @@
 
 			this.log("firing event " + name);
 			var handler = this._events[name];
+			if (handler === undefined && this.wizard !== undefined) {
+			    handler = this.wizard._events[name];
+			}
 			var ret = null;
 
 			if (typeof(handler) == "function") {
