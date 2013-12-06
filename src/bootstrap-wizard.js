@@ -267,6 +267,8 @@
 				if (!ret.status) {
 					failures = true;
 					el.parent(".control-group").toggleClass("error", true);
+					// Hide any existing popovers.
+					self.wizard.hidePopovers(el);
 					self.wizard.errorPopover(el, ret.msg);
 				}
 				else {
