@@ -181,7 +181,7 @@ Wizard
     	<td>formClass</td>
     	<td>string</td>
     	<td>form-horizontal</td>
-    	<td>Allows the configuration of the class(es) of the form. Default `form-horizontal` is set.</td>
+    	<td>Allows the configuration of the class(es) of the form. Default `form-horizontal` is set. Multiple classes are allow by separation of space.</td>
     </tr>
 </table>
 
