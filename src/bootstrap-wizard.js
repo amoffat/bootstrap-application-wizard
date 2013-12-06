@@ -1037,6 +1037,10 @@
 		serialize: function() {
 			return this.modal.find('form').serialize();
 		},
+		
+		find: function(selector) {
+			return this.modal.find(selector);
+		},
 
 
 		/*

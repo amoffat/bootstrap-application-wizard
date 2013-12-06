@@ -279,6 +279,10 @@ wizard.methodName(arguments);
         <td>reset()</td>
         <td>Resets the wizard to its original state.  This only resets wizard internals, and does not affect your form elements. If you want to reset those, listen for the `reset` event, and write some code to reset your elements manually.</td>
     </tr>
+    <tr>
+    	<td>find(selector)</td>
+    	<td>Search for the given selector within the modal. And returns the same result as jQuery.find(selector) function.</td>
+    </tr>
 </table>
 
 
