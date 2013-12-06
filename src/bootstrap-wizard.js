@@ -121,6 +121,12 @@
 
 		enable: function() {
 			this.log("enabling");
+			
+			// Issue #38 Hiding navigation link when hide card
+			// Awaiting approval
+			//
+			// this.nav.removeClass('hide');
+			
 			this.nav.addClass("active");
 			this._disabled = false;
 			this.trigger("enabled");
@@ -131,7 +137,13 @@
 			this.log("disabling");
 			this._disabled = true;
 			this.nav.removeClass("active already-visited");
-			if (hideCard) {this.el.hide();}
+			if (hideCard) {
+				this.el.hide();
+				// Issue #38 Hiding navigation link when hide card
+				// Awaiting approval
+				//
+				// this.nav.addClass('hide');
+			}
 			this.trigger("disabled");
 			return this;
 		},
