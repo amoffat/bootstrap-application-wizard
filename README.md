@@ -177,6 +177,12 @@ Wizard
             submittingText: "Submitting..."<br />
         </td>
     </tr>
+    <tr>
+    	<td>formClass</td>
+    	<td>string</td>
+    	<td>form-horizontal</td>
+    	<td>Allows the configuration of the class(es) of the form. Default `form-horizontal` is set.</td>
+    </tr>
 </table>
 
 

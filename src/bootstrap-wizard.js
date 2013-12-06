@@ -393,7 +393,7 @@
 									'</div>',
 								'</div>',
 							'</div>',
-							'<form class="form-horizontal">',
+							'<form>',
 								'<div class="wizard-cards">',
 									'<div class="wizard-card-container">',
 									'</div>',
@@ -432,7 +432,8 @@
 				backText: "Back",
 				submitText: "Submit",
 				submittingText: "Submitting...",
-			}
+			},
+			formClass: "form-horizontal"
 		};
 		
 		$.extend(this.args, args || {});
@@ -482,6 +483,7 @@
 			this.progress				= 	this.progressContainer.find('.progress-bar');
 			this.closeButton 			= 	this.modal.find('button.wizard-close');
 			this.cardsContainer			=	this.modal.find('wizard-cards-container');
+			this.form					=	this.modal.find('form');
 			this.footer 				= 	this.modal.find(".wizard-footer");
 			this.cancelButton 			= 	this.footer.find(".wizard-cancel");
 			this.backButton 			= 	this.footer.find(".wizard-back");
@@ -504,6 +506,10 @@
 			this.backButton.text(this.args.buttons.backText);
 			this.nextButton.text(this.args.buttons.nextText);
 			
+			// Apply Form Class(es)
+			this.form.addClass(this.args.formClass);
+			
+			// Register Array Holder for popovers
 			this.popovers				= [];
 			
 			// Register Close Button
