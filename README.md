@@ -155,12 +155,6 @@ Wizard
         <td>Deprecated</td>
     </tr>
     <tr>
-        <td>width</td>
-        <td>integer</td>
-        <td>750</td>
-        <td>Deprecated</td>
-    </tr>
-    <tr>
         <td>contentHeight</td>
         <td>integer</td>
         <td>300</td>
@@ -170,7 +164,7 @@ Wizard
         <td>contentWidth</td>
         <td>integer</td>
         <td>580</td>
-        <td>Default width of wizard</td>
+        <td>Default width of wizard dialog, includes step navigation, which takes 28%.</td>
     </tr>
     <tr>
         <td>buttons</td>

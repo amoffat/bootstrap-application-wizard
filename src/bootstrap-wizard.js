@@ -394,7 +394,6 @@
 			backdrop: true,
 			show: false,
 			submitUrl: "",
-			width: 750,
 			showCancel: false,
 			showClose: true,
 			progressBarCurrent: false,
@@ -1003,14 +1002,10 @@
 		},
 
 		serializeArray: function() {
-			//var form = this.modal.children("form").first();
-			//return form.serializeArray();
 			return this.modal.find('form').serializeArray();
 		},
 
 		serialize: function() {
-			//var form = this.modal.children("form").first();
-			//return form.serialize();
 			return this.modal.find('form').serialize();
 		},
 
