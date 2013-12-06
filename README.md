@@ -549,6 +549,9 @@ This will cause the error-popop to be correctly displayed when there is an valid
 </div>
 ```
 
+#### Card CSS ####
+If you require to display an selection box overlayed over wizard, like is done within the demo for some of the selects. You have to add the following class to your wizard-card element. `wizard-card-overlay`.
+
 
 
 #### Card Methods ####

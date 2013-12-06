@@ -411,14 +411,6 @@
 		
 		$.extend(this.args, args || {});
 		
-		//var wizard_template = this.args.isModal ? wizard_template_modal : wizard_template_no_modal;
-
-		// When not in modal buttons "Cancel" or "Closed" don't make much sense
-		if (!this.args.isModal) {
-			this.args.showCancel = false;
-			this.args.showClose = false;
-		}
-		
 		this._create(markup);
 	};
 	
@@ -528,6 +520,9 @@
 			
 			// Dimension Alias ( Body Height === (Navigation Height) )
 			this.dimensions.body = this.dimensions.navigation;
+			
+			// Apply OuterHeight of navigation to it's parent wizardSteps
+			this.wizardSteps.height(this.dimensions.body);
 			
 			// Modal Height === (Header + Content)
 			this.dimensions.modal = (this.dimensions.header + this.dimensions.navigation);

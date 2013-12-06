@@ -40,6 +40,7 @@
 	width: 28%;
 	background-color: #f5f5f5;
 	border-bottom-left-radius: 6px;
+	position: relative;
 }
 
 .wizard-nav-container {
@@ -104,6 +105,9 @@ li.wizard-nav-item {
 .wizard-progress-container {
 	margin-top: 20px;
 	padding: 15px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
 }
 
 .wizard-card-container {
@@ -127,6 +131,10 @@ li.wizard-nav-item {
 	height:300px;
 	margin-right: 5px;
 	*/
+}
+
+.wizard-card-overlay {
+	overflow-y: initial;
 }
 
 .wizard-card > h3 {
