@@ -261,24 +261,38 @@
 				var vret = window[v](el);
 				$.extend(ret, vret);
 
+				// Add-On
+                // This allows the use of a INPUT+BTN used as one according to boostrap layout
+                // for the wizard it is required to add an id with btn-(ID of Input)
+                // this will make sure the popover is drawn on the correct element
+				if ( $('#btn-' + el.attr('id')).length === 1 ) {
+					el = $('#btn-' + el.attr('id'));
+				}
+
 				if (!ret.status) {
 					failures = true;
 					
 					// Updated to show error on correct form-group
 					el.parents("div.form-group").toggleClass("has-error", true);
 					
-					// Add-On
-                    // This allows the use of a INPUT+BTN used as one according to boostrap layout
-                    // for the wizard it is required to add an id with btn-(ID of Input)
-                    // this will make sure the popover is drawn on the correct element
+					// This allows the use of a INPUT+BTN used as one according to boostrap layout
+	                // for the wizard it is required to add an id with btn-(ID of Input)
+	                // this will make sure the popover is drawn on the correct element
 					if ( $('#btn-' + el.attr('id')).length === 1 ) {
 						el = $('#btn-' + el.attr('id'));
 					}
 					
 					self.wizard.errorPopover(el, ret.msg);
-				}
-				else {
+				} else {
 					el.parents("div.form-group").toggleClass("has-error", false);
+					
+					// This allows the use of a INPUT+BTN used as one according to boostrap layout
+	                // for the wizard it is required to add an id with btn-(ID of Input)
+	                // this will make sure the popover is drawn on the correct element
+					if ( $('#btn-' + el.attr('id')).length === 1 ) {
+						el = $('#btn-' + el.attr('id'));
+					}
+					
 					try {
 						el.popover("destroy");
 					}
@@ -585,18 +599,15 @@
 			/*
 			 * this is the element that the popover was created for
 			 */
-			//var el = pop.prev();
-			var el = pop;
-			
 			try {
-				el.popover("destroy");
+				pop.popover("destroy");
 			}
 			/*
 			 * older versions of bootstrap don't have a destroy call
 			 * for popovers
 			 */
 			catch (e) {
-				el.popover("hide");
+				pop.popover("hide");
 			}
 		},
 		
