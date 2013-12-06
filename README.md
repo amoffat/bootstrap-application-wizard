@@ -234,8 +234,12 @@ wizard.methodName(arguments);
         <td>Sets the secondary, less pronounced title in the wizard header</td>
     </tr>
     <tr>
-        <td>errorPopover(element, msg)</td>
-        <td>This creates an error popup on element, with content msg. This is useful being called from a card-level validator, where you might want to pick specific elements on a card on which to show an error tooltip.</td>
+        <td>errorPopover(element, msg, allowHtml)</td>
+        <td>This creates an error popup on element, with content msg. 
+        This is useful being called from a card-level validator, 
+        where you might want to pick specific elements on a card on which to show an error tooltip. 
+        allowHtml (default:false) allows html content as msg argument.
+        </td>
     </tr>
     <tr>
         <td>changeNextButton(text, [class])</td>

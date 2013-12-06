@@ -562,11 +562,13 @@
 			return this;
 		},
 		
-		errorPopover: function(el, msg) {
+		errorPopover: function(el, msg, allowHtml) {
 			this.log("launching popover on", el);
+			allowHtml = typeof allowHtml !== "undefined" ? allowHtml : false;
 			var popover = el.popover({
 				content: msg,
 				trigger: "manual",
+				html: allowHtml,
 				container: el.parents('.form-group')
 			}).addClass("error-popover").popover("show").next(".popover");
 
