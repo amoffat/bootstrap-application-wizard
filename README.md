@@ -638,11 +638,3 @@ Registering event on cards can be done with the jQuery `on(event, callback)` fun
         <td>Triggers removing this card as a visited card</td>
     </tr>
 </table>
-
-
-
-
-
-##### DEPRECATED #####
-
-[Demo & Complete Documentation](http://www.panopta.com/2013/02/06/bootstrap-application-wizard/)
