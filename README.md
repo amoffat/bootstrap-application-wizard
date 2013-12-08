@@ -221,11 +221,11 @@ wizard.methodName(arguments);
     </tr>
     <tr>
         <td>serialize()</td>
-        <td>Returns all inputs from the wizard as serialized string, see [jQuery serialize()] (http://api.jquery.com/serialize/)</td>
+        <td>Returns all inputs from the wizard as serialized string, see [jQuery serialize()] (http://api.jquery.com/serialize/). Add-on: standard disabled inputs are not serialized. This function will will also serialize disabled inputs which have a attribute `data-serialize="1"`.</td>
     </tr>
     <tr>
         <td>serializeArray()</td>
-        <td>Returns all inputs from the wizard as array object, can be used for sending a JSON object to the server. See [jQuery serializeArray()] (http://api.jquery.com/serializeArray/)</td>
+        <td>Returns all inputs from the wizard as array object, can be used for sending a JSON object to the server. See [jQuery serializeArray()] (http://api.jquery.com/serializeArray/) Add-on: standard disabled inputs are not serialized. This function will will also serialize disabled inputs which have a attribute `data-serialize="1"`.</td>
     </tr>
     <tr>
         <td>getActiveCard</td>

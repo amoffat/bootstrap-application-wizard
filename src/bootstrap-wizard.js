@@ -1031,11 +1031,26 @@
 		},
 
 		serializeArray: function() {
-			return this.modal.find('form').serializeArray();
+			var form = this.form.serializeArray();
+			this.form.find('input[disabled][data-serialize="1"]').each(function() {
+				formObj = {
+					name: $(this).attr('name'),
+					value: $(this).val()
+				};
+				
+				form.push(formObj);
+			});
+			
+			return form;
 		},
 
 		serialize: function() {
-			return this.modal.find('form').serialize();
+			var form = this.form.serialize();
+			this.form.find('input[disabled][data-serialize="1"]').each(function() {
+				form = form + '&' + $(this).attr('name') + '=' + $(this).val();
+			});
+			
+			return form;
 		},
 		
 		find: function(selector) {

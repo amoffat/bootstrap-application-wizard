@@ -90,7 +90,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="ip" name="ip" placeholder="IP" />
+							<input type="text" class="form-control" id="ip" name="ip" placeholder="IP" data-serialize="1" />
 						</div>
 					</div>
 				</div>
@@ -124,7 +124,7 @@
 						check frequency of 1 minute.
 					</p>
 
-					<select data-placeholder="Service List" style="width:350px;" class="chzn-select create-server-service-list form-control" multiple>
+					<select name="services" data-placeholder="Service List" style="width:350px;" class="chzn-select create-server-service-list form-control" multiple>
 
 						<option value=""></option>
 						<optgroup label="Basic">
@@ -168,7 +168,7 @@
 						monitoring location.
 					</p>
 
-					<select data-placeholder="Monitor nodes" style="width:350px;" class="chzn-select form-control">
+					<select name="location" data-placeholder="Monitor nodes" style="width:350px;" class="chzn-select form-control">
 						<option value=""></option>
 						<optgroup label="North America">
 							<option>Atlanta</option>
@@ -218,7 +218,7 @@
 						Select the notification schedule to be used for outages.
 					</p>
 
-					<select class="wizard-ns-select chzn-select form-control" data-placeholder="Notification schedule" style="width:350px;">
+					<select name="notification" class="wizard-ns-select chzn-select form-control" data-placeholder="Notification schedule" style="width:350px;">
 						<option value=""></option>
 						<option>ALIS Production</option>
 						<option>ALIS Development &amp; Staging</option>
@@ -387,6 +387,11 @@
 					var submit = {
 						"hostname": $("#new-server-fqdn").val()
 					};
+					
+					this.log('seralize()');
+					this.log(this.serialize());
+					this.log('serializeArray()');
+					this.log(this.serializeArray());
 			
 					setTimeout(function() {
 						wizard.trigger("success");
