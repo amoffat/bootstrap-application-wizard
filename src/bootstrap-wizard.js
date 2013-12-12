@@ -419,22 +419,23 @@
 			'</div>'
 		];
 
-		this.args = {
-			submitUrl: "",
-			width: 750,
-			showCancel: false,
-			showClose: true,
-			progressBarCurrent: false,
-			increaseHeight: 0,
-			buttons: {
-				cancelText: "Cancel",
-				nextText: "Next",
-				backText: "Back",
-				submitText: "Submit",
-				submittingText: "Submitting...",
-			},
-			isModal: true
-		};
+	    this.args = {
+	        submitUrl: "",
+	        width: 750,
+	        showCancel: false,
+	        showClose: true,
+	        progressBarCurrent: false,
+	        increaseHeight: 0,
+	        buttons: {
+	            cancelText: "Cancel",
+	            nextText: "Next",
+	            backText: "Back",
+	            submitText: "Submit",
+	            submittingText: "Submitting...",
+	        },
+	        isModal: true,
+	        container: "body"
+	};
 		$.extend(this.args, args || {});
 
 		var wizard_template = this.args.isModal ? wizard_template_modal : wizard_template_no_modal;
@@ -451,7 +452,7 @@
 		this.el.find(".wizard-card-container")
 			.append(this.markup.find(".wizard-card"))
 			.append(this.submitCards);
-		$("body").append(this.el);
+		$(this.args.container).append(this.el);
 
 		this.closeButton = this.el.find("button.wizard-close");
 		this.footer = this.el.find(".wizard-modal-footer");
