@@ -119,15 +119,12 @@
             return this;
         },
 
-        enable: function() {
+        enable: function(noActivate) {
             this.log("enabling");
-            
-            // Issue #38 Hiding navigation link when hide card
-            // Awaiting approval
-            //
-            // this.nav.removeClass('hide');
-            
-            this.nav.addClass("active");
+            this.nav.removeClass('hide');
+            if (noActivate !== undefined) {
+                this.nav.addClass("active");
+            }
             this._disabled = false;
             this.trigger("enabled");
             return this;
@@ -139,10 +136,7 @@
             this.nav.removeClass("active already-visited");
             if (hideCard) {
                 this.el.hide();
-                // Issue #38 Hiding navigation link when hide card
-                // Awaiting approval
-                //
-                // this.nav.addClass('hide');
+                this.nav.addClass('hide');
             }
             this.trigger("disabled");
             return this;
@@ -845,14 +839,21 @@
                              * any validators that trigger errorPopovers can
                              * display correctly
                              */
-                            if (cardToValidate.index != currentCard.index) {
-                                cardToValidate.prev.deselect();
-                                cardToValidate.prev.markVisited();
-                                cardToValidate.select();
+                            if (!cardToValidate.isDisabled()) {
+                                if (cardToValidate.index != currentCard.index) {
+                                    cardToValidate.prev.deselect();
+                                    cardToValidate.prev.markVisited();
+                                    cardToValidate.select();
+                                }
+                                ok = cardToValidate.validate();
+                                if (!ok) {
+                                    return cardToValidate;
+                                }
                             }
-                            ok = cardToValidate.validate();
-                            if (!ok) {
-                                return cardToValidate;
+
+                            if (cardToValidate.next.isDisabled()) {
+                                i++;
+                                newCard = this._cards[i];
                             }
                             cardToValidate = cardToValidate.next;
                         }
