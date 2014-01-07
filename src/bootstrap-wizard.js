@@ -850,6 +850,11 @@
                                     return cardToValidate;
                                 }
                             }
+
+                            if (cardToValidate.next.isDisabled()) {
+                                i++;
+                                newCard = this._cards[i];
+                            }
                             cardToValidate = cardToValidate.next;
                         }
 
