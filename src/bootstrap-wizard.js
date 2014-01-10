@@ -71,7 +71,7 @@
             var w = this.wizard;
 
             // The back button is only disabled on this first card...
-            w.backButton.toggleClass("disabled", this.index == 0);
+            w.backButton.toggleClass("hidden", this.index == 0);
 
             if (this.index >= w._cards.length-1) {
                 this.log("on last card, changing next button to submit");
