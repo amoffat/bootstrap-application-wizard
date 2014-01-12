@@ -380,6 +380,7 @@
                         '<div class="modal-header wizard-header">',
                             '<button type="button" class="close wizard-close" aria-hidden="true">&times;</button>',
                             '<h3 class="modal-title wizard-title"></h3>',
+                            '<span class="wizard-subtitle"></span>',
                         '</div>',
                         '<div class="modal-body wizard-body">',
                             '<div class="pull-left wizard-steps">',
