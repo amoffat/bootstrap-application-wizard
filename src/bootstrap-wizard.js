@@ -591,7 +591,7 @@
         errorPopover: function(el, msg, allowHtml) {
             this.log("launching popover on", el);
             allowHtml = typeof allowHtml !== "undefined" ? allowHtml : false;
-            var popover = el.popover({
+            var popover = el.popover('destroy').popover({
                 content: msg,
                 trigger: "manual",
                 html: allowHtml,
