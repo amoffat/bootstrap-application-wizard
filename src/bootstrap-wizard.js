@@ -839,22 +839,23 @@
                              * any validators that trigger errorPopovers can
                              * display correctly
                              */
-                            if (!cardToValidate.isDisabled()) {
+                            
                                 if (cardToValidate.index != currentCard.index) {
                                     cardToValidate.prev.deselect();
                                     cardToValidate.prev.markVisited();
                                     cardToValidate.select();
                                 }
-                                ok = cardToValidate.validate();
+                                if (!cardToValidate.isDisabled()) {
+                                    ok = cardToValidate.validate();
+                                }
+                                else {
+                                    ok = true;
+                                }
+
                                 if (!ok) {
                                     return cardToValidate;
                                 }
-                            }
 
-                            if (cardToValidate.next.isDisabled()) {
-                                i++;
-                                newCard = this._cards[i];
-                            }
                             cardToValidate = cardToValidate.next;
                         }
 
