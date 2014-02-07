@@ -73,6 +73,16 @@
             // The back button is only disabled on this first card...
             w.backButton.toggleClass("disabled", this.index == 0);
 
+            // The start button is only visible on this first card...
+            if (this.index == 0) {
+                w.nextButton.hide();
+                w.startButton.show();
+            }
+            else {
+                w.nextButton.show();
+                w.startButton.hide();
+            }
+
             if (this.index >= w._cards.length-1) {
                 this.log("on last card, changing next button to submit");
 
@@ -404,13 +414,13 @@
                                             '<div class="btn-group-single pull-right">',
                                                 '<button class="btn wizard-back" type="button">Back</button>',
                                                 '<button class="btn btn-primary wizard-next" type="button">Next</button>',
+                                                '<button class="btn btn-warning wizard-start" type="button">Start</button>',
                                             '</div>',
                                         '</div>',
                                     '</div>',
                                 '</div>',
                             '</form>',
                         '</div>',
-                    
                     '</div>',
                 '</div>',
             '</div>'
@@ -428,11 +438,12 @@
             contentHeight: 300,
             contentWidth: 580,
             buttons: {
+                startText: "Start",
                 cancelText: "Cancel",
                 nextText: "Next",
                 backText: "Back",
                 submitText: "Submit",
-                submittingText: "Submitting...",
+                submittingText: "Submitting..."
             },
             formClass: "form-horizontal"
         };
@@ -489,6 +500,7 @@
             this.cancelButton 			= 	this.footer.find(".wizard-cancel");
             this.backButton 			= 	this.footer.find(".wizard-back");
             this.nextButton 			= 	this.footer.find(".wizard-next");
+            this.startButton 			= 	this.footer.find(".wizard-start");
             
             this._cards 				= 	[];
             this.cards 					= 	{};
@@ -500,12 +512,14 @@
             
             this._createCards();
 
+            this.startButton.click(this, this._handleNextClick);
             this.nextButton.click(this, this._handleNextClick);
             this.backButton.click(this, this._handleBackClick);
 
             this.cancelButton.text(this.args.buttons.cancelText);
             this.backButton.text(this.args.buttons.backText);
             this.nextButton.text(this.args.buttons.nextText);
+            this.startButton.text(this.args.buttons.startText);
             
             // Apply Form Class(es)
             this.form.addClass(this.args.formClass);
@@ -944,6 +958,7 @@
             this.log("hiding buttons");
             this.cancelButton.hide();
             this.closeButton.hide();
+            this.startButton.hide();
             this.nextButton.hide();
             this.backButton.hide();
             return this;
@@ -1107,6 +1122,7 @@
             this.cancelButton.hide();
             this.closeButton.hide();
             this.backButton.hide();
+            this.startButton.hide();
 
             this.showSubmitCard("loading");
             this.updateProgressBar(100);
