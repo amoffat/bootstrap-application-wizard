@@ -1059,7 +1059,7 @@
 
         serializeArray: function() {
             var form = this.form.serializeArray();
-            this.form.find('input[disabled][data-serialize="1"]').each(function() {
+            this.form.find('*[disabled][data-serialize="1"]').each(function() {
                 formObj = {
                     name: $(this).attr('name'),
                     value: $(this).val()
@@ -1073,7 +1073,7 @@
 
         serialize: function() {
             var form = this.form.serialize();
-            this.form.find('input[disabled][data-serialize="1"]').each(function() {
+            this.form.find('*[disabled][data-serialize="1"]').each(function() {
                 form = form + '&' + $(this).attr('name') + '=' + $(this).val();
             });
             
