@@ -137,6 +137,12 @@ Wizard
         <td>Show close button when initialized</td>
     </tr>
     <tr>
+        <td>showSTart</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Show start button on the first card (replace the next button)</td>
+    </tr>
+    <tr>
         <td>progressBarCurrent</td>
         <td>boolean</td>
         <td>false</td>
@@ -171,6 +177,7 @@ Wizard
         <td>array</td>
         <td colspan="2">
             cancelText: "Cancel"<br />
+            startText: "Start"<br />
             nextText: "Next"<br />
             backText: "Back"<br />
             submitText: "Submit"<br />

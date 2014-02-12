@@ -71,16 +71,22 @@
             var w = this.wizard;
 
             // The back button is only disabled on this first card...
-            w.backButton.toggleClass("disabled", this.index == 0);
+            //w.backButton.toggleClass("disabled", this.index == 0);
 
-            // The start button is only visible on this first card...
-            if (this.index == 0) {
-                w.nextButton.hide();
-                w.startButton.show();
-            }
-            else {
-                w.nextButton.show();
-                w.startButton.hide();
+            // The back button is only hide on this first card...
+            if (this.index == 0) { w.backButton.hide(); }
+            else { w.backButton.show(); }
+
+            // The start button replace the next button on the first card
+            if (w.args.showStart) {
+                if (this.index == 0) {
+                    w.nextButton.hide();
+                    w.startButton.show();
+                }
+                else {
+                    w.nextButton.show();
+                    w.startButton.hide();
+                }
             }
 
             if (this.index >= w._cards.length-1) {
@@ -433,6 +439,7 @@
             submitUrl: "",
             showCancel: false,
             showClose: true,
+            showStart: true,
             progressBarCurrent: false,
             increaseHeight: 0,
             contentHeight: 300,
@@ -711,14 +718,14 @@
                 this.setCard(0);
                 this._firstShow = false;
             }
-            if (this.args.showCancel) { 
-                this.cancelButton.show(); 
+            if (this.args.showCancel) {
+                this.cancelButton.show();
             } else {
-                this.cancelButton.hide(); 
+                this.cancelButton.hide();
             }
             if (this.args.showClose) { this.closeButton.show(); }
             this.modal.modal('show');
-            
+
             return this;
         },
 
