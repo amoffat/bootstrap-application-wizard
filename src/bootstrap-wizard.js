@@ -654,7 +654,7 @@
             }
         },
         
-        hidePopovers: function(el) {
+        hidePopovers: function() {
             this.log("hiding all popovers");
             var self = this;
 

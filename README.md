@@ -137,7 +137,7 @@ Wizard
         <td>Show close button when initialized</td>
     </tr>
     <tr>
-        <td>showSTart</td>
+        <td>showStart</td>
         <td>boolean</td>
         <td>true</td>
         <td>Show start button on the first card (replace the next button)</td>
@@ -584,6 +584,21 @@ If you require to display an selection box overlayed over wizard, like is done w
     <tr>
         <td></td>
         <td></td>
+    </tr>
+</table>
+
+
+#### Card Functions ####
+<table>
+    <tr>
+        <th>Function</th>
+        <th>Description</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>Return the card index</td>
+        <td>wizard.cards["your-card"].index</td>
     </tr>
 </table>
 
