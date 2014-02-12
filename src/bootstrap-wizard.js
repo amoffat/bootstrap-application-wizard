@@ -454,8 +454,8 @@
             },
             formClass: "form-horizontal"
         };
-        
-        $.extend(this.args, args || {});
+
+        $.extend(true, this.args, args || {});
         
         this._create(markup);
     };
