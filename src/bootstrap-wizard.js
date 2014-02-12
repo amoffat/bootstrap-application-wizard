@@ -390,7 +390,7 @@
         
         /* TEMPLATE */
         this.wizard_template = [
-            '<div  class="modal fade wizard">',
+            '<div class="modal fade wizard" tabindex="-1">',
                 '<div class="modal-dialog wizard-dialog">',
                     '<div class="modal-content wizard-content">',
                         '<div class="modal-header wizard-header">',
