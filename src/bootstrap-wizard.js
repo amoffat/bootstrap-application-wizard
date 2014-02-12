@@ -979,8 +979,20 @@
                 this.cancelButton.hide(); 
             }
             if (this.args.showClose) { this.closeButton.show(); };
-            this.nextButton.show();
-            this.backButton.show();
+            if (this.args.showStart) {
+                if (this._firstShow == 0) {
+                    this.nextButton.hide();
+                    this.backButton.hide();
+                    this.startButton.show();
+                } else {
+                    this.startButton.hide();
+                    this.nextButton.show();
+                    this.backButton.show();
+                }
+            } else {
+                this.nextButton.show();
+                this.backButton.show();
+            }
             return this;
         },
 
