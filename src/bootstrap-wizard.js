@@ -532,14 +532,18 @@
             this.form.addClass(this.args.formClass);
             
             // Register Array Holder for popovers
-            this.popovers				= [];
+            this.popovers = [];
 
             var self = this;
             var _close = function() {
-                self.reset();
                 self.close();
                 self.trigger("closed");
             };
+
+            // Reset all fields when the modal is hidden
+            this.modal.on('hidden.bs.modal', function () {
+                self.reset();
+            });
 
             // Register Close Button
             this.closeButton.click(_close);
