@@ -1077,7 +1077,7 @@
         },
 
         serializeArray: function() {
-            var form = this.form.serializeArray();
+            var form = this.form.find('input,textarea,select').not('[data-serialize="0"]').serializeArray();
             this.form.find('*[disabled][data-serialize="1"]').each(function() {
                 formObj = {
                     name: $(this).attr('name'),
@@ -1091,7 +1091,7 @@
         },
 
         serialize: function() {
-            var form = this.form.serialize();
+            var form = this.form.find('input,textarea,select').not('[data-serialize="0"]').serialize();
             this.form.find('*[disabled][data-serialize="1"]').each(function() {
                 form = form + '&' + $(this).attr('name') + '=' + $(this).val();
             });
