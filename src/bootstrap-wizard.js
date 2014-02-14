@@ -782,7 +782,9 @@
             
             this.hidePopovers();
 
-            this.trigger("reset");
+            //this.trigger("reset");
+            // Better code, disabled fields stay disabled :)
+            this.form.get(0).reset();
             return this;
         },
         
