@@ -378,7 +378,7 @@
 				});
 
 				wizard.on("reset", function() {
-					wizard.modal.find(':input').val('').removeAttr('disabled');
+					wizard.modal.find(':input').removeAttr('disabled');
 					wizard.modal.find('.form-group').removeClass('has-error').removeClass('has-succes');
 					wizard.modal.find('#fqdn').data('is-valid', 0).data('lookup', 0);
 				});
