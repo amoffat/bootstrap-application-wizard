@@ -526,7 +526,7 @@
 				event.data.setCard(index);
 			});
 			
-			if ( this.title.length != 0 ) {
+			if ( this.title && this.title.length != 0 ) {
 				this.setTitle(this.title);
 			}
 			
