@@ -1,4 +1,7 @@
 /*
+ * Bootstrap Application Wizard v2.0.0
+ * https://github.com/amoffat/bootstrap-application-wizard
+ * 
  * Copyright (C) 2013 Panopta, Andrew Moffat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
