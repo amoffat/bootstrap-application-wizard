@@ -273,7 +273,7 @@
             /*
              * run all the validators embedded on the inputs themselves
              */
-            this.el.find("[data-validate]").each(function(i, el) {
+            this.el.find("[data-validate]:visible").each(function(i, el) {
                 self.log("validating individiual inputs");
                 el = $(el);
 
