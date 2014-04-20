@@ -460,7 +460,7 @@
             
             this.modal 					= 	this.el.modal({
                 keyboard: this.args.keyboard,
-                show: this.args.show,
+                show: false,
                 backdrop: this.args.backdrop
             });
             
@@ -538,6 +538,10 @@
             
             // Set Modal Dimensions
             this.autoDimensions();
+
+            if (this.args.show) {
+                this.show();
+            }
         },
         
         autoDimensions: function() {
