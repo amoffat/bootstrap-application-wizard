@@ -122,7 +122,7 @@ Wizard
         <td>show</td>
         <td>boolean</td>
         <td>false</td>
-        <td>Shows the modal when initialized.</td>
+        <td>Shows the wizard when initialized.</td>
     </tr>
     <tr>
         <td>showCancel</td>
