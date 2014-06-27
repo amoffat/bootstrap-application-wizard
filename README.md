@@ -426,7 +426,7 @@ wizard.on("submit", function(wizard) {
         wizard.submitError();           // display the error card
         wizard.hideButtons();           // hides the next and back buttons
     });
-}
+});
 ```
 By activating these cards in the ajax request handlers, you can display information relevant to the status of the submit request
 
