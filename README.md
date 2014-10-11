@@ -356,7 +356,7 @@ wizard.on("reset", function() {
     </tr>
     <tr>
         <td>shown.bs.modal</td>
-        <td>Triggers when the modal is completely shown to the user</td>
+        <td>Triggers when the modal is completely shown to the user (standard bootstrap event)</td>
     </tr>
 </table>
 
