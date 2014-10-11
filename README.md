@@ -350,6 +350,14 @@ wizard.on("reset", function() {
         <td>readySubmit</td>
         <td>Triggers when the wizard has reached its final card</td>
     </tr>
+    <tr>
+        <td>readySubmit</td>
+        <td>Triggers when the wizard has reached its final card</td>
+    </tr>
+    <tr>
+        <td>shown.bs.modal</td>
+        <td>Triggers when the modal is completely shown to the user</td>
+    </tr>
 </table>
 
 
