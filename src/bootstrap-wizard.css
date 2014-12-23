@@ -124,7 +124,7 @@ li.wizard-nav-item {
 	display:none;
 	padding:35px;
 	padding-top:20px;
-	overflow-y:auto;
+	overflow-y:visible;
 	
 	/*
 	position:relative;
