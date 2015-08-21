@@ -6,6 +6,9 @@ Please fork if you wish to maintain yourself.
 
 ![Screenshot](http://i.imgur.com/e9B2Z.png)
 
+[Demo](http://amoffat.github.io/bootstrap-application-wizard/)
+------
+
 General
 -------
 Author
