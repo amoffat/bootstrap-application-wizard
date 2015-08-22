@@ -445,7 +445,7 @@
     Wizard.prototype = {
         log: function() {
             if (!window.console || !$.fn.wizard.logging) {return;}
-            var prepend = "wizard "+this.el.id+": ";
+            var prepend = "wizard: ";
             var args = [prepend];
             args.push.apply(args, arguments);
             console.log.apply(console, args);
@@ -702,7 +702,11 @@
             } else {
                 this.cancelButton.hide(); 
             }
-            if (this.args.showClose) { this.closeButton.show(); }
+            if (this.args.showClose) {
+                this.closeButton.show();
+            } else {
+                this.closeButton.hide();
+            }
             this.modal.modal('show');
             
             return this;
@@ -956,7 +960,11 @@
             } else {
                 this.cancelButton.hide(); 
             }
-            if (this.args.showClose) { this.closeButton.show(); };
+            if (this.args.showClose) {
+                this.closeButton.show();
+            } else {
+                this.closeButton.hide();
+            }
             this.nextButton.show();
             this.backButton.show();
             return this;
