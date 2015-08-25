@@ -140,6 +140,12 @@ Wizard
         <td>Show close button when initialized</td>
     </tr>
     <tr>
+        <td>showStart</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Show start button on the first card (replace the next button)</td>
+    </tr>
+    <tr>
         <td>progressBarCurrent</td>
         <td>boolean</td>
         <td>false</td>
@@ -174,6 +180,7 @@ Wizard
         <td>array</td>
         <td colspan="2">
             cancelText: "Cancel"<br />
+            startText: "Start"<br />
             nextText: "Next"<br />
             backText: "Back"<br />
             submitText: "Submit"<br />
@@ -224,11 +231,11 @@ wizard.methodName(arguments);
     </tr>
     <tr>
         <td>serialize()</td>
-        <td>Returns all inputs from the wizard as serialized string, see [jQuery serialize()] (http://api.jquery.com/serialize/). Add-on: standard disabled inputs are not serialized. This function will will also serialize disabled inputs which have a attribute `data-serialize="1"`.</td>
+        <td>Returns all inputs from the wizard as serialized string, see [jQuery serialize()] (http://api.jquery.com/serialize/). Add-on: standard disabled inputs are not serialized. This function will also serialize disabled inputs which have a attribute `data-serialize="1"`. Force element to not be serialize: use the next attribute `data-serialize="0"`</td>
     </tr>
     <tr>
         <td>serializeArray()</td>
-        <td>Returns all inputs from the wizard as array object, can be used for sending a JSON object to the server. See [jQuery serializeArray()] (http://api.jquery.com/serializeArray/) Add-on: standard disabled inputs are not serialized. This function will will also serialize disabled inputs which have a attribute `data-serialize="1"`.</td>
+        <td>Returns all inputs from the wizard as array object, can be used for sending a JSON object to the server. See [jQuery serializeArray()] (http://api.jquery.com/serializeArray/) Add-on: standard disabled inputs are not serialized. This function will will also serialize disabled inputs which have a attribute `data-serialize="1"`. Force element to not be serialize: use the next attribute `data-serialize="0"`</td>
     </tr>
     <tr>
         <td>getActiveCard</td>
@@ -580,6 +587,21 @@ If you require to display an selection box overlayed over wizard, like is done w
     <tr>
         <td></td>
         <td></td>
+    </tr>
+</table>
+
+
+#### Card Functions ####
+<table>
+    <tr>
+        <th>Function</th>
+        <th>Description</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>Return the card index</td>
+        <td>wizard.cards["your-card"].index</td>
     </tr>
 </table>
 

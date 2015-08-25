@@ -71,7 +71,23 @@
             var w = this.wizard;
 
             // The back button is only disabled on this first card...
-            w.backButton.toggleClass("disabled", this.index == 0);
+            //w.backButton.toggleClass("disabled", this.index == 0);
+
+            // The back button is only hide on this first card...
+            if (this.index == 0) { w.backButton.hide(); }
+            else { w.backButton.show(); }
+
+            // The start button replace the next button on the first card
+            if (w.args.showStart) {
+                if (this.index == 0) {
+                    w.nextButton.hide();
+                    w.startButton.show();
+                }
+                else {
+                    w.nextButton.show();
+                    w.startButton.hide();
+                }
+            }
 
             if (this.index >= w._cards.length-1) {
                 this.log("on last card, changing next button to submit");
@@ -257,7 +273,7 @@
             /*
              * run all the validators embedded on the inputs themselves
              */
-            this.el.find("[data-validate]").each(function(i, el) {
+            this.el.find("[data-validate]:visible").each(function(i, el) {
                 self.log("validating individiual inputs");
                 el = $(el);
 
@@ -374,7 +390,7 @@
         
         /* TEMPLATE */
         this.wizard_template = [
-            '<div  class="modal fade wizard">',
+            '<div class="modal fade wizard" tabindex="-1">',
                 '<div class="modal-dialog wizard-dialog">',
                     '<div class="modal-content wizard-content">',
                         '<div class="modal-header wizard-header">',
@@ -404,13 +420,13 @@
                                             '<div class="btn-group-single pull-right">',
                                                 '<button class="btn wizard-back" type="button">Back</button>',
                                                 '<button class="btn btn-primary wizard-next" type="button">Next</button>',
+                                                '<button class="btn btn-warning wizard-start" type="button">Start</button>',
                                             '</div>',
                                         '</div>',
                                     '</div>',
                                 '</div>',
                             '</form>',
                         '</div>',
-                    
                     '</div>',
                 '</div>',
             '</div>'
@@ -423,21 +439,23 @@
             submitUrl: "",
             showCancel: false,
             showClose: true,
+            showStart: true,
             progressBarCurrent: false,
             increaseHeight: 0,
             contentHeight: 300,
             contentWidth: 580,
             buttons: {
+                startText: "Start",
                 cancelText: "Cancel",
                 nextText: "Next",
                 backText: "Back",
                 submitText: "Submit",
-                submittingText: "Submitting...",
+                submittingText: "Submitting..."
             },
             formClass: "form-horizontal"
         };
-        
-        $.extend(this.args, args || {});
+
+        $.extend(true, this.args, args || {});
         
         this._create(markup);
     };
@@ -489,6 +507,7 @@
             this.cancelButton 			= 	this.footer.find(".wizard-cancel");
             this.backButton 			= 	this.footer.find(".wizard-back");
             this.nextButton 			= 	this.footer.find(".wizard-next");
+            this.startButton 			= 	this.footer.find(".wizard-start");
             
             this._cards 				= 	[];
             this.cards 					= 	{};
@@ -500,25 +519,31 @@
             
             this._createCards();
 
+            this.startButton.click(this, this._handleNextClick);
             this.nextButton.click(this, this._handleNextClick);
             this.backButton.click(this, this._handleBackClick);
 
             this.cancelButton.text(this.args.buttons.cancelText);
             this.backButton.text(this.args.buttons.backText);
             this.nextButton.text(this.args.buttons.nextText);
+            this.startButton.text(this.args.buttons.startText);
             
             // Apply Form Class(es)
             this.form.addClass(this.args.formClass);
             
             // Register Array Holder for popovers
-            this.popovers				= [];
+            this.popovers = [];
 
             var self = this;
             var _close = function() {
-                self.reset();
                 self.close();
                 self.trigger("closed");
             };
+
+            // Reset all fields when the modal is hidden
+            this.modal.on('hidden.bs.modal', function () {
+                self.reset();
+            });
 
             // Register Close Button
             this.closeButton.click(_close);
@@ -633,7 +658,7 @@
             }
         },
         
-        hidePopovers: function(el) {
+        hidePopovers: function() {
             this.log("hiding all popovers");
             var self = this;
 
@@ -697,14 +722,14 @@
                 this.setCard(0);
                 this._firstShow = false;
             }
-            if (this.args.showCancel) { 
-                this.cancelButton.show(); 
+            if (this.args.showCancel) {
+                this.cancelButton.show();
             } else {
-                this.cancelButton.hide(); 
+                this.cancelButton.hide();
             }
             if (this.args.showClose) { this.closeButton.show(); }
             this.modal.modal('show');
-            
+
             return this;
         },
 
@@ -757,7 +782,9 @@
             
             this.hidePopovers();
 
-            this.trigger("reset");
+            //this.trigger("reset");
+            // Better code, disabled fields stay disabled :)
+            this.form.get(0).reset();
             return this;
         },
         
@@ -944,6 +971,7 @@
             this.log("hiding buttons");
             this.cancelButton.hide();
             this.closeButton.hide();
+            this.startButton.hide();
             this.nextButton.hide();
             this.backButton.hide();
             return this;
@@ -957,8 +985,20 @@
                 this.cancelButton.hide(); 
             }
             if (this.args.showClose) { this.closeButton.show(); };
-            this.nextButton.show();
-            this.backButton.show();
+            if (this.args.showStart) {
+                if (this._firstShow == 0) {
+                    this.nextButton.hide();
+                    this.backButton.hide();
+                    this.startButton.show();
+                } else {
+                    this.startButton.hide();
+                    this.nextButton.show();
+                    this.backButton.show();
+                }
+            } else {
+                this.nextButton.show();
+                this.backButton.show();
+            }
             return this;
         },
 
@@ -1043,8 +1083,8 @@
         },
 
         serializeArray: function() {
-            var form = this.form.serializeArray();
-            this.form.find('input[disabled][data-serialize="1"]').each(function() {
+            var form = this.form.find('input,textarea,select').not('[data-serialize="0"]').serializeArray();
+            this.form.find('*[disabled][data-serialize="1"]').each(function() {
                 formObj = {
                     name: $(this).attr('name'),
                     value: $(this).val()
@@ -1057,8 +1097,8 @@
         },
 
         serialize: function() {
-            var form = this.form.serialize();
-            this.form.find('input[disabled][data-serialize="1"]').each(function() {
+            var form = this.form.find('input,textarea,select').not('[data-serialize="0"]').serialize();
+            this.form.find('*[disabled][data-serialize="1"]').each(function() {
                 form = form + '&' + $(this).attr('name') + '=' + $(this).val();
             });
             
@@ -1107,6 +1147,7 @@
             this.cancelButton.hide();
             this.closeButton.hide();
             this.backButton.hide();
+            this.startButton.hide();
 
             this.showSubmitCard("loading");
             this.updateProgressBar(100);
