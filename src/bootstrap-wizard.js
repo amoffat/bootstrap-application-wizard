@@ -703,6 +703,7 @@
                 this.cancelButton.hide(); 
             }
             if (this.args.showClose) { this.closeButton.show(); }
+            else this.closeButton.hide();
             this.modal.modal('show');
             
             return this;
