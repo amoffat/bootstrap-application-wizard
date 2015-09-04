@@ -390,7 +390,7 @@
                                 '</div>',
                                 '<div class="wizard-progress-container">',
                                     '<div class="progress progress-striped">',
-                                        '<div class="progress-bar" style="width: 0%;"></div>',
+                                        '<div class="progress-bar"></div>',
                                     '</div>',
                                 '</div>',
                             '</div>',

@@ -110,6 +110,10 @@ li.wizard-nav-item {
 	bottom: 0;
 }
 
+.wizard-progress-container .progress-bar {
+	width: 0;
+}
+
 .wizard-card-container {
 	margin-left: 28%;
 }
