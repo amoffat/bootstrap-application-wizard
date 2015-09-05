@@ -886,6 +886,8 @@
                     this.updateProgressBar(this.percentComplete);
                 }
 
+                this.showButtons();
+
                 return newCard;
             }
             else {
@@ -918,6 +920,12 @@
         lockCards: function() {
             this.log("locking nav cards");
             this.eachCard(function(i,card){card.unmarkVisited();});
+            return this;
+        },
+
+        unlockCards: function() {
+            this.log("unlocking nav cards");
+            this.eachCard(function(i,card){card.markVisited();});
             return this;
         },
 
@@ -1089,6 +1097,13 @@
             this._submitting = false;
             this.showSubmitCard("failure");
             this.trigger("submitFailure");
+
+            // Unlock the cards, and reset the buttons, to allow the user to retry
+            this.unlockCards();
+            this.nextButton.hide();
+            this.enableNextButton();
+            this._readyToSubmit = true;
+            this.trigger("readySubmit");
         },
 
         submitError: function() {
@@ -1096,6 +1111,13 @@
             this._submitting = false;
             this.showSubmitCard("error");
             this.trigger("submitError");
+
+            // Unlock the cards, and reset the buttons, to allow the user to retry
+            this.unlockCards();
+            this.nextButton.hide();
+            this.enableNextButton();
+            this._readyToSubmit = true;
+            this.trigger("readySubmit");
         },
 
 
