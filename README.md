@@ -30,6 +30,11 @@ Contributors
 * [ludokx] (https://github.com/ludokx)
 * [choudeshell] (https://github.com/choudeshell)
 
+Todo
+----
+- [ ] Vertical Alignment, bootstrap 3 spawn modal at the top of the page.
+- [ ] Update demo with 'Create Another' which restarts the wizard
+
 
 Dependencies
 ------------
